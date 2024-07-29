@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pm_menu_frag">
+
+    <fragment
+        android:id="@+id/pm_menu_frag"
+        android:name="com.honey.medovka.controllers.ProductMenuFrag"
+        android:label="Product Menu Label TODO STRING"
+        tools:layout="@layout/fragment_product_menu">
+
+        <action
+            android:id="@+id/frag_menu_to_list"
+            app:destination="@id/product_list_frag" />
+    </fragment>
+    <fragment
+        android:id="@+id/product_list_frag"
+        android:name="com.honey.medovka.controllers.ProductListFrag"
+        android:label="Product List Label TODO STRING"
+        tools:layout="@layout/fragment_product_list">
+
+        <action
+            android:id="@+id/frag_list_to_menu"
+            app:destination="@id/pm_menu_frag" />
+        <action
+            android:id="@+id/frag_list_to_det"
+            app:destination="@id/product_det_frag" />
+        <action
+            android:id="@+id/frag_list_to_edit"
+            app:destination="@+id/product_edit_farg" />
+    </fragment>
+    <fragment
+        android:id="@+id/product_det_frag"
+        android:name="com.honey.medovka.controllers.ProductDetailFrag"
+        android:label="Product Detail Label TODO STRING"
+        tools:layout="@layout/fragment_product_detail">
+
+        <action
+            android:id="@+id/frag_det_to_list"
+            app:destination="@id/product_list_frag" />
+        <action
+            android:id="@+id/frag_det_to_edit"
+            app:destination="@+id/product_edit_farg" />
+    </fragment>
+    <fragment
+        android:id="@+id/product_edit_farg"
+        android:name="com.honey.medovka.controllers.ProductEditFrag"
+        android:label="Product Edit Label TODO STRING"
+        tools:layout="@layout/fragment_product_edit">
+
+        <action
+            android:id="@+id/frag_edit_to_det"
+            app:destination="@id/product_det_frag" />
+    </fragment>
+</navigation>

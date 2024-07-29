@@ -1,0 +1,28 @@
+#obsah {
+    overflow: hidden;
+    word-break: keep-all;
+    word-wrap: normal;
+    display: block;
+}
+
+textarea {
+    resize: none;
+}
+
+.selector {
+    margin-top: 3px;
+}
+
+.deny-button {
+    margin-top: 2px;
+}
+
+.accept-button {
+    margin-bottom: 2px;
+}
+
+.button-link {
+    background: none;
+    border: none;
+    color: #007bff;
+}

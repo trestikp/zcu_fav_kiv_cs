@@ -1,0 +1,88 @@
+
+blinker.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00008000 <_start>:
+    8000:	e3a0d902 	mov	sp, #32768	; 0x8000
+    8004:	eb000012 	bl	8054 <kernel_main>
+
+00008008 <hang>:
+    8008:	eafffffe 	b	8008 <hang>
+
+0000800c <write32>:
+    800c:	e5801000 	str	r1, [r0]
+    8010:	e12fff1e 	bx	lr
+
+00008014 <read32>:
+    8014:	e5900000 	ldr	r0, [r0]
+    8018:	e12fff1e 	bx	lr
+
+0000801c <active_sleep>:
+    801c:	e3a03000 	mov	r3, #0
+    8020:	e24dd008 	sub	sp, sp, #8
+    8024:	e58d3004 	str	r3, [sp, #4]
+    8028:	e59d3004 	ldr	r3, [sp, #4]
+    802c:	e1500003 	cmp	r0, r3
+    8030:	9a000005 	bls	804c <active_sleep+0x30>
+    8034:	e59d3004 	ldr	r3, [sp, #4]
+    8038:	e2833001 	add	r3, r3, #1
+    803c:	e58d3004 	str	r3, [sp, #4]
+    8040:	e59d3004 	ldr	r3, [sp, #4]
+    8044:	e1530000 	cmp	r3, r0
+    8048:	3afffff9 	bcc	8034 <active_sleep+0x18>
+    804c:	e28dd008 	add	sp, sp, #8
+    8050:	e12fff1e 	bx	lr
+
+00008054 <kernel_main>:
+    8054:	e3a00902 	mov	r0, #32768	; 0x8000
+    8058:	e3a02000 	mov	r2, #0
+    805c:	e59f1040 	ldr	r1, [pc, #64]	; 80a4 <kernel_main+0x50>
+    8060:	e5913010 	ldr	r3, [r1, #16]
+    8064:	e3c3360e 	bic	r3, r3, #14680064	; 0xe00000
+    8068:	e3833602 	orr	r3, r3, #2097152	; 0x200000
+    806c:	e5813010 	str	r3, [r1, #16]
+    8070:	e581002c 	str	r0, [r1, #44]	; 0x2c
+    8074:	e24dd008 	sub	sp, sp, #8
+    8078:	e58d2004 	str	r2, [sp, #4]
+    807c:	e59d3004 	ldr	r3, [sp, #4]
+    8080:	e3530702 	cmp	r3, #524288	; 0x80000
+    8084:	2afffffb 	bcs	8078 <kernel_main+0x24>
+    8088:	e59d3004 	ldr	r3, [sp, #4]
+    808c:	e2833001 	add	r3, r3, #1
+    8090:	e58d3004 	str	r3, [sp, #4]
+    8094:	e59d3004 	ldr	r3, [sp, #4]
+    8098:	e3530702 	cmp	r3, #524288	; 0x80000
+    809c:	3afffff9 	bcc	8088 <kernel_main+0x34>
+    80a0:	eafffff4 	b	8078 <kernel_main+0x24>
+    80a4:	20200000 	eorcs	r0, r0, r0
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002541 	andeq	r2, r0, r1, asr #10
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	0000001b 	andeq	r0, r0, fp, lsl r0
+  10:	00543405 	subseq	r3, r4, r5, lsl #8
+  14:	01080206 	tsteq	r8, r6, lsl #4
+  18:	04120109 	ldreq	r0, [r2], #-265	; 0xfffffef7
+  1c:	01150114 	tsteq	r5, r4, lsl r1
+  20:	01180317 	tsteq	r8, r7, lsl r3
+  24:	Address 0x0000000000000024 is out of bounds.
+
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <kernel_main+0x10c8cd0>
+   4:	65462820 	strbvs	r2, [r6, #-2080]	; 0xfffff7e0
+   8:	61726f64 	cmnvs	r2, r4, ror #30
+   c:	2e323120 	rsfcssp	f3, f2, f0
+  10:	2d302e32 	ldccs	14, cr2, [r0, #-200]!	; 0xffffff38
+  14:	63662e31 	cmnvs	r6, #784	; 0x310
+  18:	20293633 	eorcs	r3, r9, r3, lsr r6
+  1c:	322e3231 	eorcc	r3, lr, #268435459	; 0x10000003
+  20:	Address 0x0000000000000020 is out of bounds.
+

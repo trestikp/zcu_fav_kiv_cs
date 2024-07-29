@@ -1,0 +1,187 @@
+
+blinker.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00008000 <_start>:
+    8000:	e3a0d902 	mov	sp, #32768	; 0x8000
+    8004:	eb000012 	bl	8054 <kernel_main>
+
+00008008 <hang>:
+    8008:	eafffffe 	b	8008 <hang>
+
+0000800c <write32>:
+    800c:	e5801000 	str	r1, [r0]
+    8010:	e12fff1e 	bx	lr
+
+00008014 <read32>:
+    8014:	e5900000 	ldr	r0, [r0]
+    8018:	e12fff1e 	bx	lr
+
+0000801c <active_sleep>:
+    801c:	e3a03000 	mov	r3, #0
+    8020:	e24dd008 	sub	sp, sp, #8
+    8024:	e58d3004 	str	r3, [sp, #4]
+    8028:	e59d3004 	ldr	r3, [sp, #4]
+    802c:	e1500003 	cmp	r0, r3
+    8030:	9a000005 	bls	804c <active_sleep+0x30>
+    8034:	e59d3004 	ldr	r3, [sp, #4]
+    8038:	e2833001 	add	r3, r3, #1
+    803c:	e58d3004 	str	r3, [sp, #4]
+    8040:	e59d3004 	ldr	r3, [sp, #4]
+    8044:	e1530000 	cmp	r3, r0
+    8048:	3afffff9 	bcc	8034 <active_sleep+0x18>
+    804c:	e28dd008 	add	sp, sp, #8
+    8050:	e12fff1e 	bx	lr
+
+00008054 <kernel_main>:
+    8054:	e3a01000 	mov	r1, #0
+    8058:	e3a0c701 	mov	ip, #262144	; 0x40000
+    805c:	e59f01c8 	ldr	r0, [pc, #456]	; 822c <kernel_main+0x1d8>
+    8060:	e5902004 	ldr	r2, [r0, #4]
+    8064:	e3c22407 	bic	r2, r2, #117440512	; 0x7000000
+    8068:	e3822401 	orr	r2, r2, #16777216	; 0x1000000
+    806c:	e59f31bc 	ldr	r3, [pc, #444]	; 8230 <kernel_main+0x1dc>
+    8070:	e5802004 	str	r2, [r0, #4]
+    8074:	e24dd020 	sub	sp, sp, #32
+    8078:	e58d1000 	str	r1, [sp]
+    807c:	e58d1000 	str	r1, [sp]
+    8080:	e59d2000 	ldr	r2, [sp]
+    8084:	e3520002 	cmp	r2, #2
+    8088:	8a00001b 	bhi	80fc <kernel_main+0xa8>
+    808c:	e580c01c 	str	ip, [r0, #28]
+    8090:	e58d1008 	str	r1, [sp, #8]
+    8094:	e59d2008 	ldr	r2, [sp, #8]
+    8098:	e1520003 	cmp	r2, r3
+    809c:	2a000005 	bcs	80b8 <kernel_main+0x64>
+    80a0:	e59d2008 	ldr	r2, [sp, #8]
+    80a4:	e2822001 	add	r2, r2, #1
+    80a8:	e58d2008 	str	r2, [sp, #8]
+    80ac:	e59d2008 	ldr	r2, [sp, #8]
+    80b0:	e1520003 	cmp	r2, r3
+    80b4:	3afffff9 	bcc	80a0 <kernel_main+0x4c>
+    80b8:	e580c028 	str	ip, [r0, #40]	; 0x28
+    80bc:	e58d1004 	str	r1, [sp, #4]
+    80c0:	e59d2004 	ldr	r2, [sp, #4]
+    80c4:	e1520003 	cmp	r2, r3
+    80c8:	2a000005 	bcs	80e4 <kernel_main+0x90>
+    80cc:	e59d2004 	ldr	r2, [sp, #4]
+    80d0:	e2822001 	add	r2, r2, #1
+    80d4:	e58d2004 	str	r2, [sp, #4]
+    80d8:	e59d2004 	ldr	r2, [sp, #4]
+    80dc:	e1520003 	cmp	r2, r3
+    80e0:	3afffff9 	bcc	80cc <kernel_main+0x78>
+    80e4:	e59d2000 	ldr	r2, [sp]
+    80e8:	e2822001 	add	r2, r2, #1
+    80ec:	e58d2000 	str	r2, [sp]
+    80f0:	e59d2000 	ldr	r2, [sp]
+    80f4:	e3520002 	cmp	r2, #2
+    80f8:	9affffe3 	bls	808c <kernel_main+0x38>
+    80fc:	e58d1000 	str	r1, [sp]
+    8100:	e59d2000 	ldr	r2, [sp]
+    8104:	e3520002 	cmp	r2, #2
+    8108:	8a00001b 	bhi	817c <kernel_main+0x128>
+    810c:	e580c01c 	str	ip, [r0, #28]
+    8110:	e58d1010 	str	r1, [sp, #16]
+    8114:	e59d2010 	ldr	r2, [sp, #16]
+    8118:	e3520501 	cmp	r2, #4194304	; 0x400000
+    811c:	2a000005 	bcs	8138 <kernel_main+0xe4>
+    8120:	e59d2010 	ldr	r2, [sp, #16]
+    8124:	e2822001 	add	r2, r2, #1
+    8128:	e58d2010 	str	r2, [sp, #16]
+    812c:	e59d2010 	ldr	r2, [sp, #16]
+    8130:	e3520501 	cmp	r2, #4194304	; 0x400000
+    8134:	3afffff9 	bcc	8120 <kernel_main+0xcc>
+    8138:	e580c028 	str	ip, [r0, #40]	; 0x28
+    813c:	e58d100c 	str	r1, [sp, #12]
+    8140:	e59d200c 	ldr	r2, [sp, #12]
+    8144:	e3520501 	cmp	r2, #4194304	; 0x400000
+    8148:	2a000005 	bcs	8164 <kernel_main+0x110>
+    814c:	e59d200c 	ldr	r2, [sp, #12]
+    8150:	e2822001 	add	r2, r2, #1
+    8154:	e58d200c 	str	r2, [sp, #12]
+    8158:	e59d200c 	ldr	r2, [sp, #12]
+    815c:	e3520501 	cmp	r2, #4194304	; 0x400000
+    8160:	3afffff9 	bcc	814c <kernel_main+0xf8>
+    8164:	e59d2000 	ldr	r2, [sp]
+    8168:	e2822001 	add	r2, r2, #1
+    816c:	e58d2000 	str	r2, [sp]
+    8170:	e59d2000 	ldr	r2, [sp]
+    8174:	e3520002 	cmp	r2, #2
+    8178:	9affffe3 	bls	810c <kernel_main+0xb8>
+    817c:	e58d1000 	str	r1, [sp]
+    8180:	e59d2000 	ldr	r2, [sp]
+    8184:	e3520002 	cmp	r2, #2
+    8188:	8a00001b 	bhi	81fc <kernel_main+0x1a8>
+    818c:	e580c01c 	str	ip, [r0, #28]
+    8190:	e58d1018 	str	r1, [sp, #24]
+    8194:	e59d2018 	ldr	r2, [sp, #24]
+    8198:	e1520003 	cmp	r2, r3
+    819c:	2a000005 	bcs	81b8 <kernel_main+0x164>
+    81a0:	e59d2018 	ldr	r2, [sp, #24]
+    81a4:	e2822001 	add	r2, r2, #1
+    81a8:	e58d2018 	str	r2, [sp, #24]
+    81ac:	e59d2018 	ldr	r2, [sp, #24]
+    81b0:	e1520003 	cmp	r2, r3
+    81b4:	3afffff9 	bcc	81a0 <kernel_main+0x14c>
+    81b8:	e580c028 	str	ip, [r0, #40]	; 0x28
+    81bc:	e58d1014 	str	r1, [sp, #20]
+    81c0:	e59d2014 	ldr	r2, [sp, #20]
+    81c4:	e1520003 	cmp	r2, r3
+    81c8:	2a000005 	bcs	81e4 <kernel_main+0x190>
+    81cc:	e59d2014 	ldr	r2, [sp, #20]
+    81d0:	e2822001 	add	r2, r2, #1
+    81d4:	e58d2014 	str	r2, [sp, #20]
+    81d8:	e59d2014 	ldr	r2, [sp, #20]
+    81dc:	e1520003 	cmp	r2, r3
+    81e0:	3afffff9 	bcc	81cc <kernel_main+0x178>
+    81e4:	e59d2000 	ldr	r2, [sp]
+    81e8:	e2822001 	add	r2, r2, #1
+    81ec:	e58d2000 	str	r2, [sp]
+    81f0:	e59d2000 	ldr	r2, [sp]
+    81f4:	e3520002 	cmp	r2, #2
+    81f8:	9affffe3 	bls	818c <kernel_main+0x138>
+    81fc:	e580c028 	str	ip, [r0, #40]	; 0x28
+    8200:	e58d101c 	str	r1, [sp, #28]
+    8204:	e59d201c 	ldr	r2, [sp, #28]
+    8208:	e352060f 	cmp	r2, #15728640	; 0xf00000
+    820c:	2affff99 	bcs	8078 <kernel_main+0x24>
+    8210:	e59d201c 	ldr	r2, [sp, #28]
+    8214:	e2822001 	add	r2, r2, #1
+    8218:	e58d201c 	str	r2, [sp, #28]
+    821c:	e59d201c 	ldr	r2, [sp, #28]
+    8220:	e352060f 	cmp	r2, #15728640	; 0xf00000
+    8224:	3afffff9 	bcc	8210 <kernel_main+0x1bc>
+    8228:	eaffff92 	b	8078 <kernel_main+0x24>
+    822c:	20200000 	eorcs	r0, r0, r0
+    8230:	000fff00 	andeq	pc, pc, r0, lsl #30
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002541 	andeq	r2, r0, r1, asr #10
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	0000001b 	andeq	r0, r0, fp, lsl r0
+  10:	00543405 	subseq	r3, r4, r5, lsl #8
+  14:	01080206 	tsteq	r8, r6, lsl #4
+  18:	04120109 	ldreq	r0, [r2], #-265	; 0xfffffef7
+  1c:	01150114 	tsteq	r5, r4, lsl r1
+  20:	01180317 	tsteq	r8, r7, lsl r3
+  24:	Address 0x0000000000000024 is out of bounds.
+
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <kernel_main+0x10c8cd0>
+   4:	65462820 	strbvs	r2, [r6, #-2080]	; 0xfffff7e0
+   8:	61726f64 	cmnvs	r2, r4, ror #30
+   c:	2e323120 	rsfcssp	f3, f2, f0
+  10:	2d302e32 	ldccs	14, cr2, [r0, #-200]!	; 0xffffff38
+  14:	63662e31 	cmnvs	r6, #784	; 0x310
+  18:	20293633 	eorcs	r3, r9, r3, lsr r6
+  1c:	322e3231 	eorcc	r3, lr, #268435459	; 0x10000003
+  20:	Address 0x0000000000000020 is out of bounds.
+

@@ -1,0 +1,445 @@
+\documentclass[12pt]{report}
+
+
+% Zařadit literaturu do obsahu
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+% Umožňuje vkládání obrázků
+\usepackage[pdftex]{graphicx}
+
+% Odkazy v PDF jsou aktivní; navíc se automaticky vkládá
+% balíček 'url', který umožňuje např. dělení slov
+% uvnitř URL
+\usepackage[pdftex]{hyperref}
+\hypersetup{colorlinks=true,
+  unicode=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  bookmarksopen=true}
+
+% Při používání citačního stylu csplainnatkiv
+% (odvozen z csplainnat, http://repo.or.cz/w/csplainnat.git)
+% lze snadno modifikovat vzhled citací v textu
+\usepackage[numbers,sort&compress]{natbib}
+
+
+% me package
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{siunitx}
+\usepackage[czech]{babel}
+\usepackage{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% VLASTNÍ TEXT PRÁCE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\@makechapterhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \Huge\bfseries
+    \ifnum \c@secnumdepth >\m@ne
+        \hangindent=1.5em
+        \noindent\hbox to 1.5em{\thechapter\hfil}%
+    \fi%
+    #1\par\nobreak
+    \vskip 40\p@
+  }}
+\def\@makeschapterhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@m
+    \huge \bfseries  #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
+
+\begin{document}
+%
+
+\begin{titlepage}
+\centerline{\includegraphics[width=10cm]{img/logo.jpg}}
+\begin{center}
+\vspace{30px}
+{\huge
+\textbf{Úvod do počítačové grafiky}\\
+\textbf{KIV/UPG}\\
+\vspace{1cm}
+}
+{\large
+\textbf{První odevzdání: pasivní vizualizace}\\
+\textbf{Počet hodin: 31}\\
+\vspace{1cm}
+}
+\vspace{1cm}
+{\large
+Pavel Třeštík\\
+}
+{\normalsize
+A17B0380P
+}
+\end{center}
+\vspace{\fill}
+\hfill
+\begin{minipage}[t]{7cm}
+\flushright
+\today
+\end{minipage}
+\end{titlepage}
+%
+%
+%
+%\maketitle
+\tableofcontents
+%
+%
+%
+\chapter{Úvod}
+\section{Pasivní vizualizace}
+Cílem první části práce je pasivní vizualizace. Ta se skládá z načtení obrázku ve formátu PGM,
+jeho zobrazení a vyznačení několika důležitých bodů v tomto obrázku. 
+
+Formát PGM uchovává černobílý obrázek. Na začátku souboru obrázku jsou některé základní informace
+specifikující přesný formát souboru a základní informace obrázku. Po těchto datech následují hodnoty,
+kde každá hodnota reprezentuje jeden pixel obrázku. Všechny hodnoty (včetně informací na začátku)
+jsou odděleny libovolným bílým znakem.
+
+Důležitými body jsou minimální a maximální převýšení a maximální stoupání. Za převýšení
+je v této práci považována absolutní hodnota bodů, tedy nejmenší (resp. největší) hodnota bodu
+v obrázku. Za maximální stoupání je považován bod, který má největší rozdíl s jedním jeho
+sousedním bodem.
+
+Dalším požadavkem je, aby se obrázek zvětšoval/ zmenšoval podle velikosti okna a zachoval poměr
+velikostí stran s načtenými hodnotami.
+%
+\subsection{Formát souboru PGM}
+Všechny hodnoty v souboru PGM jsou odděleny "bílými znaky".
+
+První hodnotou v souboru je tzv. "magické číslo", které přesněji specifikuje formát PGM. Tato třída umí
+zpracovat dva typy magických čísel a to "P5" a "P2". Rozdílem mezi těmito čísly je, že hodnoty pixelů
+jsou brána jako binární data v případě "P5" a jako ASCII čísla v případě "P2".
+
+Další hodnotou je šířka obrázku, následována výškou obrázku. Poslední hodnotou je potom maximální hodnota
+šedé, která se v obrázku nachází.
+
+Všechny výše uvedené hodnoty jsou ve formátu ASCII a mohou se zde vyskytovat komentáře, které začínají 
+znakem "\#". Komentář platí do konce řádky.
+
+Po těchto datech jsou hodnoty jednotlivých pixelů. V případě binárních dat, jsou hodnoty naskládány 
+jedna za druhou bez jakýchkoliv mezer. V případě ASCII hodnot je každá hodnota oddělena od té další
+bílou mezerou.
+%
+\subsection{Zobrazení obrázku}
+Zobrazení obrázku je relativně snadné, protože načtené hodnoty pixelů jsou řazeny po řádkách. Stačí
+tedy projít pole načtených hodnot a převést je na RGB hodnoty, které jsou potom zapsány do obrázku.
+
+Obrázek se má zvětšovat do velikosti okna, se zachováním poměru stran. Změna velikosti má být realizována
+použitím bilineární interpolace, kterou umí udělat knihovna awt, která je ke kreslení použita, takže
+není třeba ji implementovat.
+\subsection{Nalezení významných bodů}\label{points_alg}
+Pro nalezení minimálního a maximálního převýšení stačí projít hodnoty pixelů obrázku a pouze vybrat
+nejvyšší a nejmenší hodnotu pixelu.
+
+Maximální stoupání už je složitější. Bod maximálního stoupání, je pixel, který má největší rozdíl
+s jeho přímým sousedním pixelem. V potaz jsou brány pouze sousední pixely napravo, nalevo, nad a pod
+zvoleným pixelem. Pro nalezení maximálního stoupání je tedy potřeba projít všechny pixely obrázku 
+a porovnat zrovna procházený pixel s jeho sousedy.
+
+Procházet každý pixel pro nalezení max. stoupání je tedy nutností, ale porovnávat procházený pixel
+s každým jeho sousedem není úplně optimální. Například pokud jednou spočítám rozdíl pixelu se 
+sousedním pixelem napravo, nepotřebuji znovu počítat rozdíl mezi tímto párem pixelů, potom co se přesunu 
+na tohoto souseda. 
+
+Použitý algoritmus tedy vynechá první řádku pixelů a začne od druhé. Poté prochází pixely řádky a dělá
+rozdíly mezi horním a pravým sousedem, po těchto rozdílech se přesouvá na další pixel. Protože dělá
+rozdíl s pravým sousedem, nemůže procházet až do posledního pixelu na řádce a proto se z předposledního
+pixelu řádky přesouvá na další řádku. Po dosažení předposledního pixelu v obrázku končí tato část algoritmu.
+Protože byla částečně vynechaná první řádka poslední sloupec pixelů, je třeba je dodělat zvlášť. Pro
+řádku je třeba dodělat rozdíly mezi pravými sousedy a pro sloupec je třeba dodělat rozdíly mezi spodními
+sousedy. Po dodělání těchto rozdílů je algoritmus ukončen, protože by měly být vypočítány rozdíly mezi
+všemi přímo-lehlými dvojicemi pixelů a tedy mělo by být nalezeno max. stoupání.
+%TODO obrázek?
+\subsection{Vykreslení šipek}
+Protože již vím, kde v obrázku leží významné body, na které šipky ukazují, zbývá pouze určit směr šipky tak,
+aby stále byla v obrázku. Toho lze dosáhnout poměrně jednoduchým způsobem. Stačí vzít pozici bodu, vzhledem
+k obrázku a vést šipku ze směru, kde je nejvíce místa. Na příklad pokud významný bod bude v 80\% šířky obrázku,
+šipka bude vedena z pravé strany, protože tímto směrem je 80\% šířky volné. Stejným způsobem je udělána výška.
+
+Text šipky ale není brán v potaz a je jednoduše vypsán, tak aby text šiky začínal či končil u počátečního bodu šipky.
+
+Ačkoliv momentálně není řešena kolize šipek, tak by nemělo být příliš složité vyřešit kolizi šipek. Kolize by mohla být
+řešena například tak, že pokud jsou počáteční body šipek příliš blízko u sebe, tak jeden z bodů bude posunut ve směru
+nejvíce zbývajícího místa na obrázku.
+%TODO obrázek?
+\section{Interaktivní vizualizace}
+\subsection{Obarvení mapy}
+Obarvení mapy je velice přímočaré. Udělají se intervaly o velikosti výšky vrstevnic a bod dostane
+barvu, podle toho ve kterém intervalu se nachází. Barvy jsou získány z lineárního gradientu, který je složen
+ze tří barev od modré (nízké hodnoty), přes žlutou, do červené (vysoké hodnoty).
+\subsection{Nalezení vrstevnic}
+Pro nalezení vrstevnic se používá Marching Square algoritmus. Tento algoritmus prochází mřížku hodnot (v
+tomto případě pixel) čtvercovým okýnkem a dělá čáry v tomto okýnku, podle hodnot bodů na vrcholech čtverce.
+V této práci se navíc vyskytuje problém, že obrázek se zvětšuje spolu s oknem. Toto značně ztěžuje přesně
+vykreslit vrstevnice.
+\subsection{Kliknutí do mapy}
+Po kliknutí do mapy se zobrazí převýšení v bodě kliknutí a zvýrazní se vrstevnice, která je nejblíže svou
+hodnotou. Pro získání hodnoty převýšení jsou přepočteny souřadnice kliknutí v obrázku na souřadnice v původních
+datech. Z původních dat je získána hodnota, která je zobrazena a použita k nalezení nejbližší vrstevnice a to tak,
+že pokud zbytek po dělení 50 (výška vrstevnice) je menší než 25, jsou zvýrazněny vrstevnice s nejbližší 
+nižší hodnotou pod získaným převýšením. Při zbytku větším než 25 nastává opačný případ a jsou zvýrazněny
+vrstevnice s nejbližší vyšší hodnotou oproti převýšení.
+\subsection{Statistiky}
+Statistiky jsou získány z původních dat. Jsou zobrazeny 2 kategorie. Důležité body v obrázku (např.: 
+minimum, maximum, medián) a histogram převýšení. Protože významných bodů není tolik, je rozumné je
+vypsat hodnotami a navíc přidat graf. Smysluplný graf pro tyto hodnoty je Boxplot, protože tento graf
+slouží k zobrazení pravě těchto významných bodů. U histogramu je lepší pouze graf, protože hodnot by bylo
+příliš. Histogram sám o sobě je typ grafu.
+\subsection{Legenda}
+Aby uživatel poznal přibližné výšky z grafu, je třeba mu dát vědět, která barva je jaká výška. K tomuto
+slouží legenda, která zobrazí barvu s popiskem, pro které hodnoty je tato barva použita.
+%
+\chapter{Implementace}
+\section{Struktura projektu}
+Projekt nebyl navržen nad žádnou specifickou architekturou. Do určité míry struktura projektu
+připomíná architekturu MVC, ta ale není striktně dodržena. Na Obrázku \ref{img:project_struct}
+je vidět adresářová struktura projektu.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{img/project_struct.png}
+	\caption{Struktura projektu}
+	\label{img:project_struct}
+\end{figure}
+%
+\subsection{Přehled adresářů}
+Důležitými adresáři jsou \textbf{doc} a \textbf{src} (viz struktura na Obrázku \ref{img:project_struct}).
+
+Adresář \textbf{doc} obsahuje dokumentaci k programu.
+
+Adresář \textbf{src} obsahuje všechny zdrojové soubory. Podadresář \textbf{main/java} obsahuje
+zdrojové .java soubory, které jsou rozděleny v balíčkách \texttt{graphics}, \texttt{logic}, \texttt{model}.
+
+Další adresáře a podadresáře nebudou s touto prací odevzdávány, tudíž mohou být ignorovány.
+\subsection{Přehled tříd}
+\subsubsection{Package: graphics}
+Obsahuje dvě tři: \textbf{DrawingPane}, \textbf{UserInterface} a \textbf{ExportDialog}.
+
+Třída \textbf{DrawingPane} obstarává kreslící plátno aplikace. 
+Třída \textbf{UserInterface} obstarává grafické okno aplikace, ve kterém je umístěno kreslící plátno
+(instance třídy \textbf{DrawingPane}).
+Třída \textbf{ExportDialog} poskytuje dialog pro export mapy do formátu PNG. V dialogu se zadává
+výška a šířka obrázku.
+\subsubsection{Package: logic}
+Obsahuje třídu \textbf{PGMLoader}, která načítá PGM soubor. Zdrojový soubor této třídy navíc obsahuje
+soukromou třídu \textbf{IntWrapper}, která má veřejný atribut typu \texttt{int} a konstruktor nastavující
+tento atribut na 0.
+
+V druhé části je zde přidána třída \textbf{Contours}, která slouží k vyhledání vrstevnic.
+\subsubsection{Package: model}
+Obsahuje třídu \textbf{UPGImage}, která uchovává načtená data ze souboru PGM a umožňuje práci s těmito
+daty. A dále třídu \textbf{ContourCell}, která uchovává data o vrstevnicích pro jejich snazší vykreslení.
+%
+\section{Programátorská dokumentace}
+\subsection{Třída: PGMLoader}
+%
+\subsubsection{Načítání souboru}
+Soubor je nejdříve celý načten do paměti. Až z bufferu, do kterého je načten jsou poté získávány informace
+obrázku. Protože je celý obrázek načítaný do paměti, tak pro prevenci použití příliš velkého množství paměti
+je velikost vstupního souboru omezena na 50MB.
+
+Soubor je možné načítat průběžně bez bufferu použitím velmi podobného způsobu načítání. Jediným rozdílem
+by bylo to, že místo procházení bufferu a udržování pozice v něm je procházen a čten stream souboru. Tuto
+implementaci jsem také zkoušel, ale protože v jednom vlákně byla mnohonásobně pomalejší než načítání přes
+paměť, tak jsem tento způsob načítání odebral.\\
+
+%\noindent Postup načítání:
+\subsubsection{Postup načítání}
+\begin{itemize}
+  \item \texttt{UPGImage loadPGMFileThroughMemory(File f)} - začíná proces načítání souboru. Načte soubor
+  	\texttt{f} do paměti a poté předává pole typu \texttt{byte} ke zpracovávání. Vrací načtená data uložená
+	v instanci třídy \texttt{UPGImage}
+  \item \texttt{UPGImage parseBuffer(byte[] buffer)} - zpracuje buffer načteného souboru. Vrací instanci třídy
+  	\texttt{UPGImage} nebo \texttt{null} při chybě zpracování
+  \item \texttt{UPGImage loadHeaderFromBuffer(byte[] buffer, IntWrapper position)} - první krok ve zpracování
+	bufferu. Z bufferu načte základní informace o obrázku (magické číslo, šířka, výška a max. hodnota šedé).
+	S těmito informacemi vytvoří instanci \texttt{UPGImage}, kterou vrací. Do parametru \texttt{position}
+	je uložena pozice, kde načítání skončilo a tudíž kde začínají hodnoty pixelů
+  \item \texttt{void loadAsciiPixelsFromBuffer(UPGImage img, byte[] buffer, IntWrapper position)} - začne načítat
+  	hodnoty pixelů, které interpretuje jako ASCII hodnoty. Načtené hodnoty ukládá do \texttt{img}
+  \item \texttt{void loadBytePixelsFromBuffer(UPGImage img, byte[] buffer, IntWrapper position)} - začne načítat
+  	hodnoty pixelů jako číselné hodnoty v binární podobě. Načtené hodnoty ukládá do \texttt{img}
+  \item \texttt{String readAsciiFromBuffer(byte[] buffer, IntWrapper position)} - načítá buffer od
+  	\texttt{position} dokud nenarazí na bílý znak, který je specifikovaný v atributu třídy
+	\texttt{byte[] byteWhiteSpaces}. Načtený byty interpretuje jako znaky, ze kterých udělá řetězec (String).
+	Tento řetězec je návratová hodnota metody a do \texttt{position} je uložena pozice začátku další hodnoty.
+	Tato metoda je používána pro načítání hodnot pixelů, ale i v \texttt{loadHeaderFromBuffer}
+  \item \texttt{int skipLineInBuffer(byte[] buffer, int pos)} - pokud \texttt{readAsciiFromBuffer} narazí na znak
+  	"\#", zavolá tuto metodu, která prochází buffer dokud nenarazí na konec řádky ("\textbackslash n"). Buffer začíná
+	procházet od \texttt{pos} a vrací pozici nové řádky
+\end{itemize}
+%
+\subsection{Třída: UPGImage}
+Třída uchovává data obrázku a poskytuje operace na ním. Třída má řadu atributů.
+Následuje popis významných metod v této třídě. 
+Třída má, mimo popsané metody, některé typické metody, jako jsou gettery.
+
+\begin{itemize}
+  \item \texttt{void createImage()} - tato metoda musí být zavolána na každou novou instanci \texttt{UPGImage}.
+	Metoda vytvoří instanci atributu \texttt{BufferedImage initialImage}. Metoda musí být volána zvlášť,
+	protože instance \texttt{UPGImage} je vytvořena bez hodnot pixelů, proto je tato metoda volána, až po
+	tom co jsou načteny pixely
+  \item \texttt{void scaleImage(float scale)} - metoda vytváří instanci atributu \texttt{BufferedImage actualImage},
+  	která je zvětšený/ zmenšený obrázek z atributu \texttt{initialImage}
+  \item \texttt{void findPoints()} - hledá významné body obrázku. Nejdříve se prochází pole pixelů a hledá se
+  	minimální a maximální převýšení a poté volá metodu \texttt{findDiff()}, která hledá maximální stoupání
+  \item \texttt{void findDiff()} - hledá maximální stoupání v obrázku algoritmem popsaným v sekci \ref{points_alg}
+  \item \texttt{void sortRasterArray()} - seřadí načtené pole hodnot a nad ním hledá významné body. Těmi jsou
+  	průměr, medián a kvartily.
+  \item \texttt{JFreeChart createHeightBoxPlot()} - vytvoří Boxplot, který jako data bere načtené hodnoty. 
+  	Hodnoty, které tento graf vyznačuje, by měly odpovídat průměru, mediánu, kvartilům, minimu a maximu.
+  \item \texttt{JFreeChart createHeightHistogram()} - vytvoří Histogram načtených převýšení. Převýšení 
+  	blízko u sebe průměruje do jedné kategorie.
+  \item \texttt{void initContourColors()} - připraví barvy, kterými jsou vybarveny body v různých výškách.
+  	Tyto barvy jsou počítány jako linearní gradient tří barev. Začínající na odstínu modré, přes žlutou,
+	do odstínu červené.
+\end{itemize}
+%
+\subsection{Třída: UserInterface}
+Je to spouštěcí třída aplikace. Třída vytváří velmi jednoduché grafické rozhraní, které obsahuje kreslící plátno.
+Mimo kreslící plátno obsahuje také menu lištu, která má položku \textbf{File}, pod kterou je možnost
+\textbf{Load PGM file}. Tato možnost umožní načíst nový obrázek za běhu aplikace.
+
+Nově také třída vytváří panel legendy ve spodní části okna. Na středu okna je \textbf{JTabbedPane}, který 
+má 3 listy. List s kreslícím plátnem. List se statistikami důležitých bodů obrázku a histogram převýšení 
+v obrázku. Nakonec přibyly dvě nové položky menu \textbf{File} file a to: \textbf{Export map to PNG} a 
+\textbf{Export map to SVG}.
+\subsection{Třída: ExportDialog}
+Pomocná třída k \textbf{UserInterface}. Je spouštěna při kliknutí na \textbf{Export map to PNG}, kdy spustí
+nové okno, ve kterém po uživateli požaduje šířku a výšku exportovaného obrázku. Okno momentálně nemá
+žádné chybné hlášky při zadání chybné hodnoty, nebo nezadání žádné hodnoty. Při nevalidní hodnoty se okno
+jednoduše zavře.
+%
+\subsection{Třída: DrawingPane}
+Třída poskytuje kreslící plátno. Plátno je nastaveno na černou barvu, která je viditelná při velikosti okna
+neodpovídající poměru stran zobrazovaného obrázku. Třída má důležitý atribut \texttt{UPGImage img}, ze kterého
+jsou získávány hodnoty k vizualizaci. Následuje popis metod.
+
+\begin{itemize}
+  \item \texttt{void setImg(UPGImage img)} - setter atributu \texttt{img}. Také volá \texttt{createImage()} tohoto
+  	atributu
+  \item \texttt{void drawImageScaled(Graphics2D g2)} - změní velikost \texttt{actualImage} atributu \texttt{img}
+  	a potom ho vykreslí. Dále z atributu \texttt{img} získá významné body a zavolá vykreslení šipek na tyto body
+  \item \texttt{void drawArrowWithText(Graphics2D g2, int x, int y, int width, int height, String text)} - 
+  	začne proces vykreslení šipky na bod \texttt{[x, y]}. V této metodě je vypočítán směr šipky z parametrů
+	\texttt{x, y, width, height}. Nakonec je k vypočítanému počátku šipky vykreslen \texttt{text}
+  \item \texttt{void highlightPoint(Graphics2D g2)} - slouží k vypsání hodnoty bodu, na který uživatel klikl.
+  	Přepočte souřadnice do načtených dat pro získání hodnoty. Pro zvýraznění hodnoty je vykreslen jako pozadí
+	čísla bílý obdélník. Na přesné místo kliknutí uživatelem je nakreslena malá černá elipsa.
+  \item \texttt{void drawContourSquare(Graphics2D g2, ContourCell c)} - nakreslí řádku, dle typu \texttt{ContourCell}.
+  	Typ nabývá hodnot 0-15. Přesný obraz co je nakreslen je specifikován Marching Square algoritmem.
+  \item \texttt{void drawToImage(BufferedImage target, int w, int h)} - vykreslí mapu do obrázku \texttt{target},
+  	jehož šířka je \texttt{w} a výška \texttt{h}.
+  \item \texttt{void drawToSVG(Graphics2D svg)} - vykreslí mapu do plátna \texttt{svg}.
+\end{itemize}
+%
+\subsection{Třída: ContourCell}
+Třída uchovává data každého čtverce, který používá Marching Square algoritmus. Poskytuje gettery a k pár
+atributem i settery, jinak nemá žádnou funkčnost.
+%
+\subsection{Třída: Contours}
+Poskytuje většinu logiky k Marching Square algoritmu. Kvůli optimalizaci programu neobsahuje všechny funkce,
+která by tato třída běžně měla.
+
+\begin{itemize}
+  \item \texttt{ContourCell[] getAllCells(UPGImage img)} - vytvoří pole všech čtverců pixelů co se nacházejí
+  	%abomination
+  	ve scalnutém obrazu. Všechny relevantní informace získá z parametru \texttt{img} a vytvořené pole vrací
+	jako návratovou hodnotu. Všem \texttt{ContourCell} v poli nastaví všechny získatelné informace, ale některé
+	informace musí být dopočítány později.
+  \item \texttt{void determineCellTypeAndHeight(ContourCell[] cells, int contourH, int contourI)} - dopočítá
+  	chybějící informace do \texttt{ContourCell} v poli \texttt{cells} na základě parametru \texttt{contourH}.
+	V programu je navíc používá index vrstevnice, proto je i ten předán parametrem \texttt{contourI}.
+\end{itemize}
+%
+\section{Uživatelská dokumentace}
+\subsection{Závislosti}
+Program je psán v jazyce Java. Byl psán a spouštěn Javou verze 11.0.10, proto uživateli doporučuji
+použít tuto verzi.
+
+Program zobrazuje grafy a umožňuje uživateli exportovat mapu do formátu SVG. Proto má závislosti na 
+knihovnách JFreeChart (zdroj: \url{https://www.jfree.org/jfreechart/}) a
+JFreeSVG (zdroj: \url{https://www.jfree.org/jfreesvg/}).
+%
+\subsection{Linux}
+\subsubsection{Překlad}
+V kořenovém adresáři projektu se nachází skript \textbf{build.sh}. Tento skript přeloží zdrojové soubory
+do adresáře \textbf{bin}.
+
+Také je možné vygenerovat programátorskou Javadoc spuštěním skriptu \textbf{makedoc.sh}. Javadoc je 
+vytvořen do adresáře \textbf{doc/javadoc}
+%
+\subsubsection{Spuštění}
+V kořenovém adresáři se také nachází skript \textbf{run.sh}, který spustí aplikaci. Skript předává parametry
+spouštěné aplikaci. Aplikace potřebuje právě jeden parametr ke spuštění. Očekávaný parametr je soubor 
+typu PGM.
+%
+\subsection{Windows}
+\subsubsection{Překlad}
+V kořenovém adresáři projektu se nachází skript \textbf{Build.cmd}. Tento skript přeloží zdrojové soubory
+do adresáře \textbf{bin}.
+
+Také je možné vygenerovat programátorskou Javadoc spuštěním skriptu \textbf{Makedoc.cmd}. Javadoc je 
+vytvořen do adresáře \textbf{doc/javadoc}
+%
+\subsubsection{Spuštění}
+V kořenovém adresáři se také nachází skript \textbf{Run.cmd}, který spustí aplikaci. Skript předává parametry
+spouštěné aplikaci. Aplikace potřebuje právě jeden parametr ke spuštění. Očekávaný parametr je soubor 
+typu PGM.
+\subsection{Ovládání programu}
+Základními funkcemi programu je vizualizace mapy a statistik. Za docílením přehlednosti jsou proto použity
+záložky. Na následujícím obrázku (Obrázek \ref{img:app_win}) je vidět okno aplikace.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{img/main_map.png}
+	\caption{Okno aplikace}
+	\label{img:app_win}
+\end{figure}
+
+Na záložce mapy, je možné kliknout do obrázku, pro zobrazení hodnoty převýšení v kliknutém bodě a zvýraznění
+vrstevnic, které jsou nejblíže svou hodnotou k hodnotě tohoto bodu. Při kliknutí do šedé oblasti mimo obrázek
+je zvýraznění odstraněno. Ve spodní liště je legenda mapy popisující hodnoty použitých barev. Při velkém
+počtu hodnot, kdy se hodnoty nevejdou do mapy, se ve spodní části okna zobrazí posuvník na šoupání do strany.
+
+Při kliknutí na záložku \textbf{Statistics} se zobrazí statistiky v textové podobě na levá straně okna.
+Na pravé straně se zobrazí Boxplot graf těchto statistik.
+
+Při kliknutí na záložku \textbf{Histogram} se zobrazí histogram převýšení.
+
+Program dále nabízí možnost exportovat obrázek mapy z první záložky. Jsou dvě možnosti exportu. První
+je export do bitmapového obrázku s příponou\nopagebreak  \textbf{.png}.
+Druhá je export do vektorové grafiky s příponou \textbf{.svg}.
+
+Oba obrázky jsou uloženy do kořenového adresáře projektu. Bitmapový obrázek je ukládán jako
+\textbf{raster\_map.png} a vektorový jako \textbf{vector\_map.png}.
+%
+\section{Závěr}
+Bohužel jsem na práci neměl moc čas a navíc jsem jí odkládal na poslední chvíli a to se trochu neblaze
+projevilo. Ačkoliv se na práci najde hodně věcí, co by se daly vylepšit, základní funkčnost by měla být
+splněna. Jednou z nejnáročnějších akcí v programu je hledání a především vykreslování vrstevnic. Tyto 
+operace mohou trvat několik vteřin. Na velmi limitovaný čas, co jsem na práci strávil, věřím, že se mi 
+povedlo poměrně slušně optimalizovat hledání a uchovávání vrstevnic. Problémem ale je jejich vykreslení
+a opakované hledání. Pro co největší přesnost jsou vrstevnice hledány ve scalenutém obrázku, tudíž
+vrstevnice jsou hledány znova při každém zvětšení či zmenšení okna. Toto by šlo omezit například přidáním
+posluchače na změnu velikosti okna, který zamezí počítání vrstevnic do doby, než je okno ustáleno.
+Ovšem s dlouho trvajícím vykreslením je těžší něco udělat a nevím, jaké jsou v tomto směru možnosti.
+
+Mimochodem, ačkoliv aplikace umožňuje načtení nového PGM souboru za běhu z uživatelského rozhraní, 
+je na zvážení, zda tuto funkci zachovat. Důvodem je, že načtení více než jednoho obrázku skrz tuto možnost,
+na až několik minut zasekne celý program na akci odstranění legendy, aby mohla být vygenerována nová.
+Toto je údajně způsobeno layoutem a použitím jiného layoutu by se měl tento problém vyřešit.
+%
+\end{document}

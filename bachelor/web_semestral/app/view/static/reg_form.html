@@ -1,0 +1,20 @@
+<div>
+    <form method='post' id='reg_form'>
+        <dl>
+            <dd id="reg_error" style="font-size: 18px"></dd>
+            <dd>Přihlašovací jméno:</dd>
+            <dd id="reg_uname_error" style="font-size: 12px"></dd>
+            <dd><input type='text' name='username' id='reg_uname' onchange="uname_err_remove()"></dd>
+            <dd>Email:</dd>
+            <dd id="reg_email_error" style="font-size: 12px"></dd>
+            <dd><input type='email' name='email' id='reg_email' onchange="uname_email_remove()"></dd>
+            <dd>Heslo:</dd>
+            <dd id="reg_passwd_error" style="font-size: 12px"></dd>
+            <dd><input type='password' name='password' id='reg_passwd' onchange="uname_passwd_remove()"></dd>
+            <dd>Heslo pro kontrolu:</dd>
+            <dd id="reg_passwd_check_error" style="font-size: 12px"></dd>
+            <dd><input type='password' name='password_check' id='reg_passwd_check' onchange="uname_passwd_check_remove()"></dd>
+            <dd><input class="float-left" type='button' name='register' value='Zaregistrovat' id='register'></dd>
+        </dl>
+    </form>
+</div>

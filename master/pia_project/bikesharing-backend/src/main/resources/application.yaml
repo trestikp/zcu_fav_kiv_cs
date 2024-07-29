@@ -1,0 +1,17 @@
+# github oauth2 configuration
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: dcddae03ad53f02c1d90 # app client id
+            clientSecret: 8384487a500a0f3421809321b8ed50c9f885784d # app client secret
+            redirectUri: "http://localhost:4200/github-login" # must be the same as the one registered in the GitHub app
+        provider:
+          # general github API configuration
+          github:
+            authorizationUri: https://github.com/login/oauth/authorize
+            tokenUri: https://github.com/login/oauth/access_token
+            userInfoUri: https://api.github.com/user
+            userNameAttribute: id

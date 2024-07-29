@@ -1,0 +1,68 @@
+<div class="container-fluid d-flex justify-content-center v-100">
+  <div class="d-flex flex-column justify-content-center w-75">
+    <div class="">
+      <div class="mt-2">
+        <p>This work is a semester project for KIV/PIA-E &#64; Západočeská Univerzita v Plzni</p>
+      </div>
+
+      <div class="mt-2">
+        <h5 class="h5">Use case</h5>
+        <p>Bikesharing project based on
+          <a href="https://github.com/fidransky/kiv-pia-labs/wiki/Semester-project">Task assignment</a></p>
+        <p>Application offers several pages to achieve the task. The pages are described bellow.</p>
+        <p>Communication with the user is done through either page elements (HTML), or through pop out dialogs (toast).</p>
+      </div>
+
+      <hr/>
+
+      <h5 class="h5">Pages</h5>
+
+      <div class="mt-2">
+        <h6 class="ms-2 h6">Bikesharing (homepage)</h6>
+        <div class="ms-4">
+          <p>Contains a map provided by OpenStreetMap.</p>
+
+          <p>On this map stands, rides and rides in progress are shown using markers.</p>
+          <img src="assets/marker-bike-gray-no-border.png" alt="Observed ride of anonymous user">
+          <img src="assets/marker-bike-green.png" alt="Logged in users ride">
+          <img src="assets/stand_empty.png" alt="Empty stand">
+          <img src="assets/stand_with_bikes.png" alt="Stand with bikes">
+
+          <p>Logged in users will also see a row with 2 select boxes and a button to start a new ride above the map.</p>
+          <p><b>Stands</b> - anyone can see them. Uses square markers with numbers. Numbers are a count of how many bikes
+            are currently stored at the stand. Markers with bikes are cyan and markers with no bikes are orange.</p>
+          <p><b>Green bike marker</b> - ride of the currently logged in user. This marker tries to follow a path, that is
+          highlighted as blue path along the roads.</p>
+          <p><b>Gray bike marker</b> - ride of different user that is being tracked to show the bike location.</p>
+
+          <p><b>Ride row</b> - user cannot start a ride from location with no bikes.
+            User can't select the same location in both select boxes.</p>
+          <img class="w-100" src="assets/ride_row.png" alt="New ride row">
+
+          <p><b>Finished ride row</b> - while ride is in progress it shows target location and approximate distance.
+          Finishing the ride is done automatically upon reaching the destination.</p>
+<!--          <p><b>Finish ride</b> - this button is hidden until ride reaches destination.-->
+<!--            The reason for manual ride finish was originally to test 50m proximity and to let user know the ride is over.</p>-->
+          <img class="w-100" src="assets/ride_in_progress.png" alt="Finished ride row">
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <h6 class="ms-2 h6">Past rides</h6>
+        <div class="ms-4">
+          <p>Simple table showing past rides of logged in user.</p>
+          <img class="w-100" src="assets/past_rides.png" alt="Table of past rides">
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <h6 class="ms-2 h6">Due for service</h6>
+        <div class="ms-4">
+          <p>Simple table showing bikes that require service. Service interval is configurable and is set on the backend.</p>
+          <img class="w-100" src="assets/service_table.png" alt="Table of bikes requiring service">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

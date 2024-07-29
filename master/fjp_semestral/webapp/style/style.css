@@ -1,0 +1,113 @@
+body {
+    height: 100vh !important;
+    width: 100vw !important;
+    overflow: hidden;
+}
+
+.left {
+    background-color: #dadada;
+    width: 50vw;
+}
+
+.terminal {
+    height: 200px;
+}
+
+.resize-terminal {
+    height: 14px;
+    cursor: row-resize;
+}
+
+.resize-editor {
+    width: 14px;
+    cursor: col-resize;
+}
+
+.resize {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.right {
+    flex-grow: 1;
+}
+
+.flex-grow {
+    flex: 1 0 auto;
+}   
+
+.editor.bg-dark {
+    background: #495057 !important;
+}
+
+.editor.bg-light {
+    background: #f8f9fa !important;
+}
+
+nav.bg-light, .resize.bg-light {
+    background-color: #abafb4 !important;
+}
+
+.editor::-webkit-resizer {
+    display: none;
+}
+
+.h-0 {
+    height: 0 !important;
+}
+
+.editor {
+    overflow: auto;
+}
+
+.editor p {
+    margin-bottom: 0;
+}
+
+.editor .tab {
+    display: inline-block;
+    width: 1em;
+}
+
+.err { 
+    background-image:
+      linear-gradient(45deg, transparent 65%, red 80%, transparent 90%),
+      linear-gradient(135deg, transparent 5%, red 15%, transparent 25%),
+      linear-gradient(135deg, transparent 45%, red 55%, transparent 65%),
+      linear-gradient(45deg, transparent 25%, red 35%, transparent 50%);
+    background-repeat:repeat-x;
+    background-size: 8px 2px;
+    background-position:0 95%;
+}
+
+#editor-in {
+    overflow: auto;
+    padding: 0 !important;
+}
+
+#editor-out {
+    font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+}
+
+.debugger {
+    position: absolute;
+    top: 99.99vh;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+}
+
+.middle-editor.console-hidden {
+    max-height: 100vh !important;
+}
+
+.modal-content {
+    border: 0 !important;
+}
+
+.modal-body {
+    max-height: 75vh;
+    overflow-x: auto;
+}

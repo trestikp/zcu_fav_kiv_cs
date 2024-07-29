@@ -1,0 +1,685 @@
+\documentclass[12pt]{report}
+
+
+% Zařadit literaturu do obsahu
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+% Umožňuje vkládání obrázků
+\usepackage[pdftex]{graphicx}
+
+% Odkazy v PDF jsou aktivní; navíc se automaticky vkládá
+% balíček 'url', který umožňuje např. dělení slov
+% uvnitř URL
+\usepackage[pdftex]{hyperref}
+\hypersetup{colorlinks=true,
+  unicode=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=black,
+  bookmarksopen=true}
+
+% Při používání citačního stylu csplainnatkiv
+% (odvozen z csplainnat, http://repo.or.cz/w/csplainnat.git)
+% lze snadno modifikovat vzhled citací v textu
+\usepackage[numbers,sort&compress]{natbib}
+
+
+% me package
+\usepackage{float}
+\usepackage{subfig}
+\usepackage{siunitx}
+\usepackage[czech]{babel}
+\usepackage{tabularx}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% VLASTNÍ TEXT PRÁCE
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\makeatletter
+\def\@makechapterhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \Huge\bfseries
+    \ifnum \c@secnumdepth >\m@ne
+        \hangindent=1.5em
+        \noindent\hbox to 1.5em{\thechapter\hfil}%
+    \fi%
+    #1\par\nobreak
+    \vskip 40\p@
+  }}
+\def\@makeschapterhead#1{%
+  {\parindent \z@ \raggedright \normalfont
+    \interlinepenalty\@m
+    \huge \bfseries  #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
+
+\begin{document}
+%
+
+\begin{titlepage}
+\centerline{\includegraphics[width=10cm]{img/logo.jpg}}
+\begin{center}
+\vspace{30px}
+{\huge
+\textbf{úvod do počítačových sítí}\\
+\textbf{hra: dáma (anglická verze)}\\
+\vspace{1cm}
+}
+{\large
+\textbf{kiv/ups}\\
+\vspace{1cm}
+}
+\vspace{1cm}
+{\large
+pavel třeštík\\
+}
+{\normalsize
+a17b0380p
+}
+\end{center}
+\vspace{\fill}
+\hfill
+\begin{minipage}[t]{7cm}
+\flushright
+\today
+\end{minipage}
+\end{titlepage}
+
+
+%\maketitle
+\tableofcontents
+
+
+
+\chapter{popis hry dáma (anglická verze)}
+jako téma semestrální práce jsem si zvolil hru dáma. zvolil jsem takzvanou anglickou dámu. tedy
+hra se hraje na šachovnici s 64mi poli a vyhrává ten hráč, který první sebere všechny
+kameny protivníka. hráči mají kameny na černých polích šachovnice a smí se pohybovat pouze
+diagonálně, tedy pouze po černých polích. kamenů jsou dva druhy: pěšák a král. rozdíl mezi
+klasickou verzí dámy a anglickou dámou je, že v anglické verzi král (česky označován jako dáma),
+smí všemi směry, ale stejně jako pěšák pouze o jedno políčko. mezitím v klasické verzi
+král (dáma) může všemi směry a skočit libovolný počet polí.
+
+\section{pohyb}
+pěšák smí pouze o jedno políčko v před. král (dáma) smí o jedno políčko všemi směry. tah hráče
+končí po posunutí kamene.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/move_a.png}
+    \caption{Zvýraznění tahu}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/move_b.png}
+    \caption{Po tahu}
+  \end{minipage}
+\end{figure}
+
+\section{Braní kamenů protivníka}
+Pokud v cestě ku předu stojí kámen protivníka a je za ním prázdné políčko, tak jak král, tak pěšák 
+přeskočí kámen protivníka na políčko za něj a kámen protivníka odstraní. Stále platí, že
+pěšák smí brát pouze ku před, zatímco král může brát všemi směry.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/take_a.png}
+    \caption{Sebrání protivníkova kamene}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/take_b.png}
+    \caption{Po provedení tahu}
+  \end{minipage}
+\end{figure}
+
+\section{Pohyb}
+Pokud po tom, co hráč vzal protivníkův kámen, je v cestě další protivníkův kámen, za kterým
+je volné místo, hráč táhne znovu a vezme tím tak 2 protivníkovy kameny v jednom tahu. Toto
+je možné opakovat dokud je splněna ta podmínka, že v blízkosti kamene je protivníkův kámen
+a za ním je volné políčko. Tedy hráč může vykonat další tah, pokud během dalšího tahu sebere
+kámen protivníka.
+
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/chain_take_a.png}
+    \caption{Řetězové braní dvou kamenů}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[b]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{img/chain_take_b.png}
+    \caption{Po provedení tahu}
+  \end{minipage}
+\end{figure}
+%
+%
+%
+\chapter{Popis protokolu}
+Protokol je posílán jako nešifrovaný text. Jednotlivé části jsou oddělené znakem '$|$'. Zpráva
+je ukončena znakem '\textbackslash n'.
+%
+%
+\section{Obecný tvar zpráv}
+Obecný tvar zprávy je:
+\begin{itemize}
+	\item ID\_hráče$|$INSTRUKCE$|$parametr$|$parametr...
+\end{itemize}
+
+\noindent Obecný tvar odpovědi serveru je: 
+
+\begin{itemize}
+	\item ID\_hráče$|$VYSLEDEK$|$kód\_výsledku$|$zpráva$|$parametr$|$parametr...
+\end{itemize}
+
+
+\noindent VYSLEDEK nabývá hodnot "OK" a "ERROR", lze ho považovat za typ instrukce.
+%
+%
+\section{Tabulka instrukcí a stavový diagram protokolu}
+
+\begin{table}[H]
+\begin{tabularx}{\textwidth}{|c|X|}
+\hline
+\textbf{Instrukce}      & \textbf{Popis}                                                                                                                                          \\ \hline
+\textbf{CONNECT}        & Požadavek na vytvoření hráče. Očekávána jako první instrukce komunikace. Server odpojí kterékoliv připojení, které jako první instrukci nepošle CONNECT \\ \hline
+\textbf{LOBBY}          & Požadavek pro získání seznamu hracích místností, které jsou dostupné k připojení.                                                                       \\ \hline
+\textbf{CREATE\_LOBBY}  & Požadavek na vytvoření nové herní místnosti.                                                                                                            \\ \hline
+\textbf{DELETE\_LOBBY}  & Požadavek o zrušení existující herní místnosti.                                                                                                         \\ \hline
+\textbf{JOIN\_GAME}     & Požadavek na připojení k zvolené herní místnosti.                                                                                                       \\ \hline
+\textbf{TURN}           & Požadavek na provedení tahu.                                                                                                                            \\ \hline
+\textbf{DISCONNECT}     & Požadavek na odpojení spojení.                                                                                                                          \\ \hline
+\textbf{PING}           & Ping slouží k udržení stávající komunikace. Server na PING také odpovídá instrukcí PING.                                                                \\ \hline
+\textbf{OPPONENT\_JOIN} & Instrukce serveru informující protivníka hráče, který zaslal požadavek o připojení protihráče.                                                          \\ \hline
+\textbf{OPPONENT\_DISC} & Instrukce serveru informující protivníka hráče o protivníkově ztrátě připojení.                                                                          \\ \hline
+\textbf{OPPONENT\_TURN} & Instrukce serveru informující protivníka hráče o tahu provedeným hráčem.                                                                                 \\ \hline
+\textbf{OPPONENT\_RECO} & Instrukce informující protivníka hráče o úspěšné znovu připojení hráče do hry.                                                                          \\ \hline
+\textbf{OPPONENT\_LEFT} & Instrukce informující hráče o protivníkově permanentní ztrátě připojení a ukončení probíhající hry.                                                     \\ \hline
+\end{tabularx}
+	\caption{Tabulka instrukcí a popisů}
+	\label{tab:instruction_tab}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{img/protocol_auto.png}
+	\caption{Diagram komunikace protokolem}
+	\label{img:protocol_auto}
+\end{figure}
+
+\section{Popis instrukcí a odpovědí}
+%
+\subsection{Obecné negativní odpovědi serveru}
+\begin{itemize}
+	\item 400 - Sockets don't match
+	\item 400 - Unknown connection
+	\item 400 - Verification failed
+	\item 401 - Instruction got too many parameters
+	\item 401 - Unrecognized instruction
+	\item 401 - TURN needs at least 2 parameters
+	\item 401 - Too many parameters for TURN
+\end{itemize}
+%
+\subsection{Instrukce: CONNECT}
+\subsubsection{Popis}
+Připojí hráče k serveru. Pokud první zpráva od nového připojení není CONNECT,
+tak server spojení odpojí. Při zadání ID hráče slouží k znovu připojení k serveru.
+Při znovu připojování k serveru, server posílá dodatečné informace nutné k obnovení
+klienta do stavu před ztrátou připojení.
+
+\subsubsection{Přesné formáty}
+\begin{itemize}
+	\item 0$|$CONNECT$|$username - hráč se připojuje poprvé
+		\begin{itemize}
+			\item username - jméno hráče
+		\end{itemize}
+	\item ID\_hráče$|$CONNECT$|$username - hráč se pokouší znovu připojit
+		\begin{itemize}
+			\item username - jméno hráče
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Kódy a zprávy odpovědí}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Connection success
+			\item 202 - Reconnection success$|$state
+			\item 202 - Reconnection success$|$state$|$board$|$on\_top$|$opponent\_name
+				\begin{itemize}
+					\item state - stav hráče na serveru (connected, turn, opponent\_turn)
+					\item board - hrací pole (pouze černé pole - délka 32 znaků)
+					\item on\_top - jestli má hráč červené/ modré kameny (0 = modré, 1 = červené)
+					\item opponent\_name - jméno protivníka
+				\end{itemize}
+		\end{itemize}
+	\item Negativní
+		\begin{itemize}
+			\item 402 - Username is empty
+			\item 403 - Username too long
+			\item 404 - Username already in use
+			\item 405 - Server failed to add player
+			\item 406 - Player with this ID doesn't exist
+			\item 407 - Is this an attack attempt
+			\item 408 - Failed to attach gameboard
+			\item 409 - Maximum number of connections reached
+			\item 410 - This socket is already connected
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: CREATE\_LOBBY}
+\subsubsection{Popis}
+Vytvoří nové lobby a přidá hráče, který ho vytvořil, jako hráč 1. Hráč 1 má vždy
+bílé (v mé verzi modré) kameny.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$CREATE\_LOBBY$|$lobby\_name
+		\begin{itemize}
+			\item lobby\_name - jméno vytvářené místnosti
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Kódy a zprávy odpovědí}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Successfully created lobby
+		\end{itemize}
+	\item Negativní
+		\begin{itemize}
+			\item 402 - Server failed to create lobby
+			\item 403 - Lobby name is too long
+			\item 404 - Lobby name already exists
+			\item 405 - This cannot be done in current state
+			\item 406 - Failed to add player to game
+			\item 407 - Failed to add game
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: JOIN\_GAME}
+\subsubsection{Popis}
+Připojí hráče do existující místnosti. Připojeného hráče nastaví jako hráč 2, který má
+černé (v mé verzi červené) kameny. Místnost, do které se hráč připojil je odstartována.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$JOIN\_GAME$|$lobby\_name
+		\begin{itemize}
+			\item lobby\_name - jméno místnosti pro připojení
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Kódy a zprávy odpovědí}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Successfully joined game
+		\end{itemize}
+	\item Negativní
+		\begin{itemize}
+			\item 402 - Lobby name is too long
+			\item 403 - This cannot be done in current state
+			\item 404 - Failed to find game lobby
+			\item 405 - Failed to contact opponent
+			\item 406 - Server lost game
+			\item 407 - Failed to add game
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: DELETE\_LOBBY}
+\subsubsection{Popis}
+Zruší vytvořené lobby, pokud v něm je pouze zakladatel lobby (teoreticky nemůže
+existovat lobby s více hráči než 1, protože hra je automaticky odstartována po
+připojení druhého hráče).
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$DELETE\_LOBBY
+\end{itemize}
+
+\subsubsection{Kódy a zprávy odpovědí}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Lobby deleted
+		\end{itemize}
+	\item Negativní
+		\begin{itemize}
+			\item 402 - This cannot be done in current state
+			\item 402 - You don't have lobby
+			\item 402 - No game found
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: LOBBY}
+\subsubsection{Popis}
+Požadavek uživatele na získání místností dostupných k připojení.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$LOBBY
+\end{itemize}
+
+\subsubsection{Kódy a zprávy odpovědí}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Available lobbies$|$lobby\_name\_1$|$...
+		\end{itemize}
+	\item Negativní
+		\begin{itemize}
+			\item 402 - Failed to fetch game
+			\item 403 - This cannot be done in current state
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: TURN}
+\subsubsection{Popis}
+Provede tah nebo sekvenci tahů. Kontaktuje protivníka o hráčovo tazích.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$TURN$|$parametr\_1$|$parametr\_2$|$...$|$parametr\_30
+		\begin{itemize}
+			\item parametr\_1 - index (pozice) kamene
+			\item parametr\_x - index (pozice) cíle tahu
+					  - index nabývá hodnot 0-63
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Kódy a zprávy odpovědí}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 202 - Turn Successful
+			\item 203 - You won!
+			\item 204 - You lost!
+		\end{itemize}
+	\item Negativní
+		\begin{itemize}
+			\item 402 - This cannot be done in current state
+			\item 403 - Failed to find game
+			\item 404 - It is not your turn
+			\item 405 - Need starting position
+			\item 406 - Too few parameters
+			\item 407 - Parameter isn't number
+			\item 408 - Failed to validate move
+			\item 409 - Failed to find opponent
+			\item 410 - Failed to contact opponent
+			\item 411 - Opponent message error
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: DISCONNECT}
+\subsubsection{Popis}
+Použito když se hráč odpojuje od serveru. Vymaže hráče ze seznamu hráčů. Zavře spojení z kterého 
+přišel požadavek.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$DISCONNECT
+\end{itemize}
+
+\subsubsection{Kódy a zprávy odpovědí}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - You were disconnected
+		\end{itemize}
+	\item Negativní
+		\begin{itemize}
+			\item nemá negativní odpovědi. Vždy zavře připojení, z kterého přišel požadavek.
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: OPPONENT\_JOIN}
+\subsubsection{Popis}
+Instrukce, kterou posílá server klientovi (protivníkovi hráče, který poslal instrukci JOIN\_GAME),
+informující ho o připojení protivníka.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_protivníka$|$OPPONENT\_JOIN$|$kód$|$zpráva$|$username
+		\begin{itemize}
+			\item kód - jedná se o zprávu serveru, takže klient očekává kód operace
+			\item zpráva - podobně jako kód je očekávána klientem
+			\item username - jméno hráče volající JOIN\_GAME
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Kódy a zprávy}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Successfully joined game
+		\end{itemize}
+	\item Negativní
+		\begin{itemize}
+			\item 401 - Server lost your lobby
+		\end{itemize}
+
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: OPPONENT\_TURN}
+\subsubsection{Popis}
+Pošle protivníkovi klientův tah.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$OPPONENT\_TURN$|$kód$|$zpráva$|$parametr\_1$|$parametr\_2$|$...
+	\begin{itemize}
+			\item kód, zpráva - viz předchozí
+			\item parametr\_x - stejně jako u TURN, index v intervalu 0-63
+	\end{itemize}
+
+\end{itemize}
+
+\subsubsection{Kódy a zprávy}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Opponent moved
+			\item 203 - You won!
+			\item 204 - You lost!
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: OPPONENT\_DISC}
+\subsubsection{Popis}
+Informuje hráče o protivníkově odpojení.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$OPPONENT\_DISC$|$kód$|$zpráva
+		\begin{itemize}
+				\item kód, zpráva - viz instrukce OPPONENT\_JOIN
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Kódy a zprávy}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Opponent disconnected
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: OPPONENT\_RECO}
+\subsubsection{Popis}
+Informuje hráče o protivníkově znovu připojení.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$OPPONENT\_RECO$|$kód$|$zpráva
+		\begin{itemize}
+				\item kód, zpráva - viz instrukce OPPONENT\_JOIN
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Kódy a zprávy}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Opponent reconnected
+		\end{itemize}
+\end{itemize}
+%
+%
+%
+\subsection{Instrukce: OPPONENT\_LEFT}
+\subsubsection{Popis}
+Slouží k informování protivníka o permanentním ukončení protivníkovo spojení.
+
+\subsubsection{Přesný formát}
+\begin{itemize}
+	\item ID\_hráče$|$OPPONENT\_RECO$|$kód$|$zpráva
+		\begin{itemize}
+				\item kód, zpráva - viz instrukce OPPONENT\_JOIN
+		\end{itemize}
+\end{itemize}
+
+\subsubsection{Kódy a zprávy}
+\begin{itemize}
+	\item Pozitivní
+		\begin{itemize}
+			\item 201 - Terminating game. Opponent left.
+			\end{itemize}
+\end{itemize}
+
+%
+\chapter{Programátorská dokumentace}
+\section{Server}
+Je napsán v jazyce C a překládán překladačem gcc pomocí poskytnutého makefile.
+\subsection{Struktura serveru}
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{img/server_src_struct.png}
+	\caption{Struktura src adresáře serveru}
+	\label{img:server_src_struct}
+\end{figure}
+
+\subsubsection{Adresář app}
+V adresáři app se nacházejí moduly \texttt{automaton, game a player}, ve kterých se nachází struktury 
+hry, hráče a automatu. Dále se zde nachází logika hry a obsluhující funkce.
+\subsubsection{general\_functions}
+Tento modul poskytuje "generickou" strukturu spojového seznamu. Vzhledem k tomu, že data jsou v 
+tomto seznamu uložené pomocí void pointeru, umožňuje tento modul pouze přidávat prvky. Práci nad
+seznamy už si implementuje každý modul využívající seznam sám. V této práci jsou využity spojové
+seznamy pro hráče a hry.
+\subsubsection{logger}
+Poskytuje funkci zápisu zprávy do souboru.
+\subsubsection{main}
+Hlavní modul programu obstarávající spouštěcí parametry.
+\subsubsection{Adresář network}
+Obsahuje moduly \texttt{server, controller, message\_builder}. Server se stará o spuštění
+serverového socketu a následných připojení a komunikaci klientů. Komunikaci klientů obsluhuje
+controller, který využívá message\_builder pro snadnější vytvoření odpovědi klientovi.
+
+\subsection{Obsluha spojení}
+Jak již bylo zmíněno spojení/ připojení a komunikaci obsluhuje modul \texttt{server}. Obsluha více
+socketů je realizována použitím \textbf{fd\_set} a funkce \textbf{select}. Program tedy obsluhuje
+klienty postupně pouze jedním vláknem.
+%
+\section{Klient}
+Klient je psán v jazyce Java verze 11 s použitím GUI knihovny JavaFX, která do Java 1.8 byla součástí
+Java JDK. Ovšem pro verzi Java 11 už je JavaFX samostatnou knihovnou.
+\subsection{Struktura klienta}
+\begin{figure}[H]
+	\centering
+	\includegraphics[]{img/klient_src_struct.png}
+	\caption{Adresářová struktura src adresáře klienta}
+	\label{img:klient_src_struct}
+\end{figure}
+
+V adresáři \texttt{java} se nachází podadresáře \texttt{game, graphics, network}. 
+V adresáři \texttt{game} se nachází logika hry a funkce obsluhují komunikaci se serverem.
+Adresář \texttt{network} obsahuje třídy starající se o navázání spojení a posílání/ přijímání
+dat a jejich parsování. Adresář graphics obsahuje grafické ovladače k souborům s příponou .fxml,
+které se nacházejí v \texttt{resources/fxml\_res}.
+%
+\chapter{Uživatelská dokumentace}
+\section{Server}
+U serveru je předpokládáno, že bude spuštěn na platformě Linux. Server je konzolová aplikace. Překládá
+a spouští se z terminálu.
+%
+\subsection{Překlad}
+Server se překládá pomocí 
+poskytnutého \texttt{makefile}. V adresáři serveru, kde se nachází \texttt{makefile} stačí
+pouze zavolat příkaz \textbf{make} a zdrojové soubory jsou přeloženy překladačem \textbf{gcc}
+a vytvoří se spustitelný soubor \textbf{run\_server}.
+%
+\subsection{Spuštění}
+Server se pouští voláním \textbf{run\_server}. Při spuštění je možné použít několik volitelných parametrů.
+\begin{itemize}
+	\item -h - vypíše nápovědu k parametrům
+	\item -a IP - pokusí se vytvořit a spustit socket s adresou IP.
+	\item -p PORT - pokusí se vytvořit a spustit socket s portem PORT.
+	\item -c NUM - povoluje maximálně NUM počet současných spojení na serveru.
+\end{itemize}
+
+Tyto parametry jsou na sobě nezávislé a mohou být použity v libovolném pořadí. Pokud některý parametr
+není použit, je použita jeho výchozí hodnota.
+Výchozí hodnoty:
+\begin{itemize}
+	\item IP - 127.0.0.1
+	\item PORT - 61116
+	\item NUM - 50
+\end{itemize}
+%
+\section{Klient}
+Klienta je možné spustit na platformách Linux a Windows. Je psán v Java 11 a překládán pomocí gradle.
+\subsection{Překlad}
+Aplikace k přeložení používá gradle wrapper, který má závislost na Java. Aplikace je také psána v jazyce 
+Java a proto je po uživateli požadováno nainstalovat JDK. Doporučuji nainstalovat 
+\textbf{Oracle SE Development Kit 11.0.10}, který je dostupný pro Windows i Linux.
+
+K aplikace je poskytnutý gradle wrapper, který umožňuje téměř automatické přeložení aplikace.
+Uživateli stačí pouze v příkazovém řádku zavolat příkaz \textbf{gradlew build} v kořenovém adresáři
+klienta (kde se nachází soubor \texttt{gradlew} a \texttt{gradlew.bat}).
+%
+\subsection{Spuštění}
+Po příkazu \textbf{gradlew build} se v kořenovém adresáři klienta vytvoří adresář \texttt{build},
+v něm podadresář \texttt{libs} a v tomto podadresáři soubor \texttt{client.jar} 
+(výsledná cesta tedy je \texttt{build/libs/client.jar}). Tento soubor je možné spustit z příkazové řádky
+pomocí \texttt{java -jar jmeno\_souboru}. A nebo na systému Windows dvojitým poklepáním na tento soubor, za
+předpokladu, že systém má nastavenou systémovou proměnou pro spuštění Java 11.
+%
+\chapter{Závěr}
+Obě aplikace splňují hlavní body zadání a jsou stabilní. Není tedy možné je shodit nesprávnou komunikací.
+Ovšem stále jsou věci, které se dají vylepšit.
+
+Například na straně serveru, jsou použité spojové seznamy, pro 
+uchovávání probíhajících her a připojených hráčů. Tyto struktury, ale nejsou velmi efektivní při hledání jednoho
+konkrétního prvku v seznamu, což je akce, kterou server dělá velmi často. Není tedy od věci zvážit, jak by si
+výkonnostně vedla například struktura Binary Search Tree.
+
+U klienta by bylo možné vylepšit celkový vzhled grafického rozhraní, který má výchozí vzhled Java FX komponent.
+
+\end{document}

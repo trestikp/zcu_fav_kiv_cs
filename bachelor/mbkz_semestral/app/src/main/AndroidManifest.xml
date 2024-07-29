@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.honey.medovka">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/medovka_icon_512x512"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/medovka_icon_round_512x512"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".controllers.ProductAddition"
+            android:parentActivityName=".controllers.PmFragActivity"
+            android:theme="@style/medovkaTheme" />
+        <activity
+            android:name=".controllers.OrderFragActivity"
+            android:parentActivityName=".controllers.MainActivity"
+            android:theme="@style/medovkaTheme" />
+        <activity
+            android:name=".controllers.PmFragActivity"
+            android:parentActivityName=".controllers.MainActivity"
+            android:theme="@style/medovkaTheme" />
+        <activity
+            android:theme="@style/medovkaTheme"
+            android:name=".controllers.OrderCreation"
+            android:parentActivityName=".controllers.OrderFragActivity" />
+<!--        <activity-->
+<!--            android:name=".controllers.OrderDetail"-->
+<!--            android:parentActivityName=".controllers.OrderList" />-->
+        <activity
+            android:name=".controllers.About"
+            android:parentActivityName=".controllers.MainActivity"
+            android:theme="@style/medovkaTheme" />
+        <activity android:name=".controllers.NoDB" />
+        <activity
+            android:name=".controllers.MainActivity"
+            android:theme="@style/medovkaTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

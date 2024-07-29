@@ -1,0 +1,178 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{hyperref}
+%%%
+%%%
+\begin{document}
+%%%
+%%% TITLE PAGE
+%%%
+\begin{titlepage}
+\centerline{\includegraphics[width=10cm]{img/logo.jpg}}
+\begin{center}
+\vspace{30px}
+{\huge
+\textbf{Formální jazyky a překladače}\\
+\textbf{Méně známé jazyky: Rust}\\
+\vspace{1cm}
+}
+{\large
+\textbf{KIV/FJP}\\
+\vspace{1cm}
+}
+\vspace{1cm}
+{\large
+Pavel Třeštík\\
+}
+{\normalsize
+A22N0137P
+}
+\end{center}
+\vspace{\fill}
+\hfill
+\begin{minipage}[t]{7cm}
+\flushright
+\today
+\end{minipage}
+\end{titlepage}
+%%%
+%%% TEXT START
+%%%
+\section{Úvod}
+V této eseji, budou prozkoumány základy jazyka Rust a na konci zhodnoceno, zda-li je jazyk vhodný pro 
+začátečníky. Musím podotknout, že osobně s jazykem nemám zkušenosti, kromě příkladů, které jsem zkoušel
+pro tuto esej. O jazyk mám ale zájem, protože stále více lidí věří, že by Rust mohl (zvětšiny) nahradit 
+C/ C++ a navíc má být jazyk podporován přímo v Linuxovým kernelu od verze 6.
+%
+\section{Jazyk Rust}
+Rust začal vznikat v roce 2006 jako osobní projekt a lze ho tedy považovat za relativně nový jazyk.
+Obecně Rust nabízí více způsobů programování - tedy není to ani funkcionální, či
+objektový jazyk, ale trochu od všeho. Hlavní účel Rustu, je poskytnout vysokoúrovňové koncepty,
+ochrany a zároveň zachovat efektivitu výsledných programů. Rust je možné využít k programování široké
+škály aplikací od operačních systémů po webové prohlížeče a podobné aplikace. Rust je překládaný jazyk,
+což tvoří požadavky na některé vlastnosti.
+%
+\subsection{Datové typy a deklarace}
+V moderním jazyku je nezbytné mít možnost deklarovat proměnné, se kterými se dále pracuje. V Rustu se
+proměnné deklarují klíčovým slovem \texttt{let}. Definovat datový při deklaraci není vždy nutné. Pokud
+ovšem typ není definován tak musí být jednoznačně definována hodnota, podle které lze typ určit. Typ musí
+být znám při překladu programu, pokud typ není deklarován, nebo nezle určit, tak se program nepřeloží.
+Konstanty musí mít vždy definovaný typ.
+%
+\begin{lstlisting}[caption=Deklarace int proměnné]
+let a = 5;
+\end{lstlisting}
+%
+
+Velkou změnou oproti většině používaných jazyků je, že všechny proměnné jsou při běžné 
+\texttt{immutable}. Pokud má být hodnota proměnné měněna, tak je třeba, aby deklarace proměnné obsahovala
+klíčové slovo \texttt{mut}.
+%
+\begin{lstlisting}[caption=Deklarace mutable proměné]
+let mut a: u32 = 5; // variable a is mutable and its
+//type is set to be unsigned 32-bit integer
+\end{lstlisting}
+%
+
+Druhý způsob, jak je možné dosáhnout změny hodnoty proměnné je tzv. \texttt{shadowing}.\texttt{Shadowing} je
+opětovné deklarování stejné proměnné ve stejném scope.
+%
+\begin{lstlisting}[caption=Příklad shadowingu]
+let a = 5;
+let a = a + 1;
+// a now contains values 6
+\end{lstlisting}
+%
+\subsection{Řízení toku programu}
+Rust nabízí standardně známou funkcionalitu pro řízení programu. Tedy poměrně klasické \texttt{if} - 
+\texttt{else}, \texttt{for}, \texttt{while} a navíc \texttt{loop}, což je pouze nekonečná smyčka, kterou je
+třeba přerušit pomocí \texttt{break}. Rust nemá standardní \texttt{switch} - \texttt{case} syntaxi, ale 
+funkcionalitu přepínače poskytuje pomocí konstrukce \texttt{match}.
+%
+\subsection{Správa paměti - Ownership}
+Jedna z nejvýznačnějších věcí Rustu je jeho způsob správy paměti. Rust nepoužívá ani manuální správu paměti
+ani garbage collection. Místo toho používá koncept, kterému říká \texttt{ownership (vlastnictví)}. Ve 
+zkratce vlastnictví funguje tak, že paměť proměnných je uvolněna na konci \texttt{scope}. Koncept je ale
+mnohem složitější. Například pokud funkce vrátí proměnou, která je ve funkci definována, tak vlastnictví 
+této proměnné je přesunuto na volajícího této funkce.
+
+Pokud je proměnná použita mimo svůj scope, tak dochází
+ke kopírování nebo přesunutí. To ale nemusí být chtěné chování a proto jazyk používá reference. Ve správě
+paměti jsou poté další složitější mechanismy, které slouží k ochraně paměti. Například - na proměnou smí
+existovat pouze jedna mutable reference. Nebo - pokud na proměnou již existují immutable reference, tak
+není možné vytvořit mutable referenci, dokud jsou immutable reference používané.
+
+Podrobnější zkoumání mechanismu vlastnictví a správy paměti v Rustu je mimo tuto esej. Nejdůležitějším
+bodem, co je třeba si zde odnést je, že Rust má vysokou bezpečnost správy paměti a programátor je vždy
+informován o nebezpečné práci s pamětí ve formě chyby (error) při překladu a je nucen chybu řešit.
+%
+\subsection{Obsluha chyb}
+Jak již bylo zmíněno, tak Rust se snaží o to, aby výsledné programy byly robustní a bezpečné (proti chybám
+programátora). Z tohoto důvodu Rust nutí programátora ošetřovat potenciálně nebezpečné operace. Příkladem
+může být parsování řetězce na int (viz následující kód).
+%
+\begin{lstlisting}
+let number: u32 = super_string.trim().parse()
+		.expect("Not a number!");
+\end{lstlisting}
+%
+V tomto příkladu je podstatná část \texttt{.expect("Not a number!");}, která shodí program s uvedenou hláškou,
+pokud parsování selže. Pokud by \texttt{expect} nebyl uveden, tak by kód nešel ani zkompilovat!
+
+Způsob, jakým
+se pozná, že dojde k chybě je, že funkce jako \texttt{parse} vrací speciální strukturu \texttt{Result}, která
+obsahuje hodnotu \texttt{OK(operation\_result)} a \texttt{ERR(specific\_error)}. Místo volání \texttt{expect}
+je možné vytvořit vlastní obsluhu těchto chyb, která nemusí způsobit konec programu.
+%
+\subsection{Rust paradigm}
+Rust nelze popsat jedním programátorským stylem. Kód lze psát funkcionálně nebo pokud programátor opravdu chce,
+tak i objektově. Návrhem se ale Rust více podobá jazyku C, kdy má funkce a struktury (\texttt{struct} pro 
+uživatelské datové typy).
+
+Objektové programování v Rustu je možné, ale je odlišné od běžného OOP. Jedním rozdílem je, že neexistují
+objekty, ale pouze struktury, ve kterých není možné specifikovat funkce. Funkce "nad objektem" jsou
+deklarovány a implementovány ve vlastním bloku \texttt{impl Nazev\_Struktury)}. Dalším význačným rozdílem
+je, že v Rustu neexistuje dědičnost. Polymorfismu je ale možné dosáhnout pomocí tzv. \texttt{trait}, což
+je obdoba rozhraní.
+%
+\subsection{Další vlastnosti}
+Rust také nabízí možnost generického programování. Podpora vláken je samozřejmostí a navíc díky celkovému
+konceptu Rustu, by měla být práce s vlákny bezpečná. Rust by měl programátora navést správným směrem, aby
+byla práce s více vlákny bezpečná (hlavně nedocházelo k souběhům). Dále je zde možnost práce se smart
+pointery či třeba iterátory. V poslední řadě Rust také nabízí tzv. \texttt{unsafe} Rust, což je blok
+kódu, ve kterém je možné dělat nebezpečné operace jako například práce s raw pointery, která v Rustu
+jinak není možná.
+
+Rust také obsahuje framework pro testování a psaní testů by mělo být velmi jednoduché.
+%
+\section{Závěr}
+V této eseji je velmi povrchově prozkoumán jazyk Rust. K vypracování eseje byla použita především
+oficiální dokumentace, která je velmi podrobná a propracovaná
+(\url{https://doc.rust-lang.org/book/title-page.html}).
+
+Osobně s jazykem nemám žádné zkušenosti a při vytváření této eseje jsem s jazykem pracoval poprvé. Můj
+názor na jazyk je převážně pozitivní. Jazyk nutí programátora psát bezpečný kód a nabízí velkou škálu
+moderních konstrukcí a postupů. Jednou z výtek, kterou bych k jazyku měl, je trochu "otravná" syntaxe v
+některých věcech. Například vracení hodnoty z funkce. Ačkoliv Rust má klíčové slovo \texttt{return},
+které funguje, jak se předpokládá, tak ve všech příkladech je pro vrácení hodnoty použita syntaxe 
+\texttt{expression\_that
+\_is\_returned} bez středníku. Tedy např. \texttt{fn pokus() { 3 }} je funkce,
+která vrací hodnotu 3. Pokud by ale funkce byla rozsáhlá, tak vrácení hodnoty tímto způsobem může
+být snadno přehlédnuto.
+
+Celkově bych Rust určitě nedoporučil pro nováčky. Jazyk obsahuje řadu konceptů, které je vhodné znát pro
+práci s ním a nováčci jednoduše nemůžou mít tyto znalosti. Příkladem může být například to, že všechny
+proměnné jsou immutable a aby byly mutable, tak je třeba to extra deklarovat. Dalším příkladem je
+třeba to, že Rust poměrně hodně pracuje s referencemi, ale nedělá to automaticky (uživatel musí používat
+\texttt{\&} na místě reference). Pokud se navíc tyto příklady zkombinují, tak vzniká nový příklad a to je
+správné použití mutable referencí. Jazyk bych doporučil pro programátory, co mají aspoň základní nebo
+radši pokročilé znalosti. Pro zájemce je dobré, aby znal pojmy stack, heap, pointer, reference a další.
+%%%
+%%%
+\end{document}

@@ -1,0 +1,6 @@
+- zaklad kernelu
+- linkaz
+- build skript
+- pouziti C++
+- C-Runtime, C++-Runtime (bss inicializace, volani konstruktoru)
+- GPIO driver

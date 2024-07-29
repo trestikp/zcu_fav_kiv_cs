@@ -1,0 +1,60 @@
+<script type="text/javascript" src="AnimatedMarker.js" ></script>
+
+<div class="container-fluid d-flex flex-column h-100">
+  <div class="row justify-content-center" *ngIf="isUserLoggedIn() && (getRideStatus() == RideState.NO_RIDE || getRideStatus() == RideState.FINISHED)">
+    <div class="col-md-9 mt-2"> <!-- Originally also had mb-2, but this is replaced by mt-2 on the map -->
+      <div class="d-flex align-items-center">
+        <!-- First column for the "Start ride from" label and select -->
+        <div class="me-2">
+          <label for="rideFrom">Start ride from:</label>
+        </div>
+        <div class="flex-grow-1 me-2">
+          <select id="rideFrom" name="rideFrom" class="form-select form-select-sm w-100 border-dark-subtle"
+                  [(ngModel)]="fromStand" (change)="updateToStandOptions()">
+            <option *ngFor="let stand of stands1" [value]="stand.id">
+              {{ stand.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Second column for the "to" label and select -->
+        <div class="me-2">
+          <label for="rideTo">to:</label>
+        </div>
+        <div class="flex-grow-1 me-2">
+          <select id="rideTo" name="rideTo" class="form-select form-select-sm w-100 border-dark-subtle"
+                  [(ngModel)]="toStand" (change)="updateFromStandOptions()">
+            <option *ngFor="let stand of stands2" [value]="stand.id">
+              {{ stand.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Third column for the "Start ride" button -->
+        <div class="col-md-2">
+          <button id="startRide" class="btn btn-primary w-100" (click)="startRide()">Start ride</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" *ngIf="isUserLoggedIn() && (getRideStatus() >= RideState.TRACKING_UNFINISHED && getRideStatus() <= RideState.FINISHED_NO_TRACKING)">
+    <div class="col-md-9 mt-2"> <!-- Originally also had mb-2, but this is replaced by mt-2 on the map -->
+      <div class="d-flex align-items-center">
+        <div class="col-md-4 flex-grow-1">
+          Ride in progress to {{ toStandName }}. Approximate (air) distance to finish: {{ distanceToEnd }}m.
+        </div>
+
+<!--        <div class="col-md-2" *ngIf="(getRideStatus() === RideState.TRACKING_UNFINISHED_IN_PROXIMITY || getRideStatus() === RideState.FINISHED_NO_TRACKING)">-->
+<!--          <button id="finishRide" class="btn btn-primary w-100" (click)="finishRide()">Finish ride</button>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="row flex-grow-1 justify-content-center mt-2 mb-2">
+    <div class="col-md-9">
+      <div id="map"></div>
+    </div>
+  </div>
+</div>

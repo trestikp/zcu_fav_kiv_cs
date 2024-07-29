@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="orangeDark">#FF9900</color>
+    <color name="orangeDarkHalfAlpha">#80FF9900</color>
+    <color name="orangeLighter">#FFAD33</color>
+    <color name="black">#000000</color>
+    <color name="yellow">#FFFF00</color>
+    <color name="yellow_slightly_darker">#EEEE17</color>
+    <color name="yellow_darker">#D8D813</color>
+    <color name="yellow_test">#d3d312</color>
+    <color name="purple">#A020F0</color>
+    <color name="blue_green">#0D98BA</color>
+</resources>

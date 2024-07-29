@@ -1,0 +1,15 @@
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/domain/User.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/repository/InMemoryRoomRepository.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/number/reactive/RandomReactiveNumberService.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/domain/Message.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/repository/UserRepository.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/repository/InMemoryUserRepository.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/service/UserService.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/domain/Room.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/repository/RoomRepository.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/number/NumberService.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/chat/service/RoomService.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/number/reactive/ConstantReactiveNumberService.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/number/RandomNumberService.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/number/reactive/ReactiveNumberService.java
+/home/cf/ZCU/first_year/winter/PIA_E/practical/pia-labs-core/src/main/java/cz/zcu/kiv/pia/labs/number/ConstantNumberService.java

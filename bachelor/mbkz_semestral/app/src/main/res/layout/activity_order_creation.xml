@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="10dp"
+    android:paddingEnd="10dp"
+    android:paddingTop="10dp">
+
+    <TextView
+        android:id="@+id/oc_info_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        android:text="@string/order_creation_info" />
+
+    <LinearLayout
+        android:id="@+id/name_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oc_info_label" >
+<!--        app:layout_constraintTop_toTopOf="parent">-->
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:text="@string/name"/>
+        <EditText
+            android:id="@+id/oc_name_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_weight="0.6"
+            android:inputType="text"
+            android:hint="@string/word_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/city_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/name_cont">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:text="@string/city"/>
+        <EditText
+            android:id="@+id/oc_city_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_weight="0.6"
+            android:inputType="text"
+            android:hint="@string/word_value"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/post_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/city_cont">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:text="@string/post_code"/>
+        <EditText
+            android:id="@+id/oc_post_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_weight="0.6"
+            android:inputType="number"
+            android:hint="@string/number_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/street_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/post_cont">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:text="@string/street"/>
+        <EditText
+            android:id="@+id/oc_street_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_weight="0.6"
+            android:inputType="text"
+            android:hint="@string/word_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hn_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/street_cont">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.4"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:text="@string/house_number"/>
+        <EditText
+            android:id="@+id/oc_hn_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:layout_weight="0.6"
+            android:inputType="number"
+            android:hint="@string/number_value" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/oc_product_list_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hn_cont">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:text="@string/list_products"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:background="#60FF9900"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/od_button_cont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oc_product_list_cont">
+
+        <TableLayout
+            android:id="@+id/oc_product_table"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/oc_product_rv"-->
+<!--        android:layout_marginTop="5dp"-->
+<!--        android:layout_marginBottom="5dp"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/od_button_cont"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/od_product_list_cont" />-->
+
+    <LinearLayout
+        android:id="@id/od_button_cont"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/oc_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginBottom="16dp"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/oc_create"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_marginBottom="16dp"
+            android:text="@string/create_order" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

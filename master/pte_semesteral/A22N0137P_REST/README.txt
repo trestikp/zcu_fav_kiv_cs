@@ -1,0 +1,5 @@
+- data_bin - contains jar and most files required to create test data. For launching read README.txt in this directory.
+- data_source - source files for the project
+- es_datamodel - contains single file, that holds mapping for ES model
+- kibana_dashboard - exported dashboard from kibana
+- kibana_screen	- screenshot(s) of the dashboard

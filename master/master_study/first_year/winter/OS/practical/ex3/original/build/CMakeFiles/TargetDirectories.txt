@@ -1,0 +1,3 @@
+/home/cf/ZCU/OS/practical/ex3/original/build/CMakeFiles/kernel.dir
+/home/cf/ZCU/OS/practical/ex3/original/build/CMakeFiles/edit_cache.dir
+/home/cf/ZCU/OS/practical/ex3/original/build/CMakeFiles/rebuild_cache.dir

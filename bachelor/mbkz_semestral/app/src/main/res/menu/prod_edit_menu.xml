@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/pd_add_product_image"
+        android:title="@string/add_image_to_product" />
+    <item
+        android:id="@+id/pd_delete_product_image"
+        android:title="@string/delete_image_from_product" />
+</menu>

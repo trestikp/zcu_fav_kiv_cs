@@ -1,0 +1,48 @@
+# FJP semestral
+- supposed theme: PL/0 compiler with simple IDE in JS/ web
+- the first draft grammar seems too simple - can it work? should it include various types?
+
+TURN-IN CHECKLIST:
+- integer:
+    - [x] \+
+    - [x] \-
+    - [x] \*
+    - [x] /
+    - [x] =
+    - [x] \#
+    - [x] <
+    - [x] <=
+    - [x] \>
+    - [x] \>=
+- float:
+    - [x] \+
+    - [x] \-
+    - [x] \*
+    - [x] /     - only works "somewhat" (it seems periodic numbers don't work e.g.: 1/3)
+    - [x] =
+    - [x] \#
+    - [x] <
+    - [x] <=
+    - [x] \>
+    - [x] \>=
+- boolean:
+    - [x] ~
+    - [x] &
+    - [x] |
+    - [x] =
+    - [x] \#
+- string: --- CANCELED
+    - [ ] \+
+    - [ ] =
+    - [ ] \#
+- [x] if
+- [x] else
+- [x] while
+- [x] for
+- [x] return value - tested integer only (TODO: test other data types)
+- [ ] multiple assignment --- CANCELED
+- [x] parallel assignment
+- [x] expression priority with - tried with booleans, seems to work (TODO: test other data types)
+- [x] parameters
+- [x] ternary - its useless, cannot be used to assign values to variables... basically if with different syntax
+- [x] AND, OR, NEG (in some basic form)

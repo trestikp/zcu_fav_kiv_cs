@@ -1,0 +1,270 @@
+The target system is: Generic -  - BCM2835
+The host system is: Linux - 5.19.15-201.fc36.x86_64 - x86_64
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/bin/arm-none-eabi-g++ 
+Build flags: ;-O0;-g;-nostartfiles;-mfloat-abi=hard;-mfpu=vfp;-march=armv6zk;-mtune=arm1176jzf-s;-O0;-g;-nostartfiles;-mfloat-abi=hard;-mfpu=vfp;-march=armv6zk;-mtune=arm1176jzf-s
+Id flags:  
+
+The output was:
+0
+/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000008000
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/cf/ZCU/OS/practical/ex3/build/CMakeFiles/3.22.2/CompilerIdCXX/a.out"
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/lib64/ccache/arm-none-eabi-gcc 
+Build flags: ;-O0;-g;-nostartfiles;-mfloat-abi=hard;-mfpu=vfp;-march=armv6zk;-mtune=arm1176jzf-s;-O0;-g;-nostartfiles;-mfloat-abi=hard;-mfpu=vfp;-march=armv6zk;-mtune=arm1176jzf-s
+Id flags:  
+
+The output was:
+0
+/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/ld: warning: cannot find entry symbol _start; defaulting to 0000000000008000
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/cf/ZCU/OS/practical/ex3/build/CMakeFiles/3.22.2/CompilerIdC/a.out"
+
+Checking whether the ASM compiler is GNU using "--version" matched "(GNU assembler)|(GCC)|(Free Software Foundation)":
+arm-none-eabi-gcc (Fedora 12.2.0-1.fc36) 12.2.0
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/cf/ZCU/OS/practical/ex3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5c7ce/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5c7ce.dir/build.make CMakeFiles/cmTC_5c7ce.dir/build
+gmake[1]: Entering directory '/home/cf/ZCU/first_year/winter/OS/practical/ex3/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj
+/usr/bin/arm-none-eabi-g++ -DRPI0=1  -O0 -g -nostartfiles -mfloat-abi=hard -mfpu=vfp -march=armv6zk -mtune=arm1176jzf-s -O0 -g -nostartfiles -mfloat-abi=hard -mfpu=vfp -march=armv6zk -mtune=arm1176jzf-s    -v -o CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-none-eabi-g++
+Target: arm-none-eabi
+Configured with: ../gcc-12.2.0/configure --prefix=/usr --mandir=/usr/share/man --with-pkgversion='Fedora 12.2.0-1.fc36' --with-bugurl=https://bugzilla.redhat.com/ --infodir=/usr/share/info --target=arm-none-eabi --enable-interwork --enable-multilib --with-python-dir=share/arm-none-eabi/gcc-12.2.0/python --with-multilib-list=rmprofile --enable-plugins --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --disable-tls --enable-languages=c,c++ --with-newlib --disable-nls --disable-shared --disable-threads --with-gnu-as --with-gnu-ld --with-gmp --with-mpfr --with-mpc --with-headers=yes --with-system-zlib --with-sysroot=/usr/arm-none-eabi
+Thread model: single
+Supported LTO compression algorithms: zlib
+gcc version 12.2.0 (Fedora 12.2.0-1.fc36) 
+COLLECT_GCC_OPTIONS='-D' 'RPI0=1' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-o' 'CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_5c7ce.dir/'
+ /usr/libexec/gcc/arm-none-eabi/12.2.0/cc1plus -quiet -v -imultilib arm/v5te/hard -D__USES_INITFINI__ -D RPI0=1 /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_5c7ce.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mfloat-abi=hard -mfpu=vfp -mfloat-abi=hard -mfpu=vfp -mtune=arm1176jzf-s -marm -mlibarch=armv6zk+fp -march=armv6zk+fp -g -g -O0 -O0 -version -o /tmp/ccNWQwyI.s
+GNU C++17 (Fedora 12.2.0-1.fc36) version 12.2.0 (arm-none-eabi)
+	compiled by GNU C version 12.2.1 20220819 (Red Hat 12.2.1-1), GMP version 6.2.1, MPFR version 4.1.0-p13, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/arm-none-eabi/usr/local/include"
+ignoring nonexistent directory "/usr/arm-none-eabi/usr/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0
+ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0/arm-none-eabi/arm/v5te/hard
+ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0/backward
+ /usr/lib/gcc/arm-none-eabi/12.2.0/include
+ /usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed
+ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include
+End of search list.
+GNU C++17 (Fedora 12.2.0-1.fc36) version 12.2.0 (arm-none-eabi)
+	compiled by GNU C version 12.2.1 20220819 (Red Hat 12.2.1-1), GMP version 6.2.1, MPFR version 4.1.0-p13, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: e0cb7d52735b2dfdcf53933f754eb815
+COLLECT_GCC_OPTIONS='-D' 'RPI0=1' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-o' 'CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_5c7ce.dir/'
+ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/as -v -march=armv6zk+fp -mfloat-abi=hard -mfloat-abi=hard -mfpu=vfp -mfpu=vfp -meabi=5 -o CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccNWQwyI.s
+GNU assembler version 2.39 (arm-none-eabi) using BFD version (Fedora 2.39-1.fc36) 2.39
+COMPILER_PATH=/usr/libexec/gcc/arm-none-eabi/12.2.0/:/usr/libexec/gcc/arm-none-eabi/12.2.0/:/usr/libexec/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.0/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/
+LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/12.2.0/arm/v5te/hard/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/arm/v5te/hard/:/usr/arm-none-eabi/lib/arm/v5te/hard/:/usr/lib/gcc/arm-none-eabi/12.2.0/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/:/usr/arm-none-eabi/lib/
+COLLECT_GCC_OPTIONS='-D' 'RPI0=1' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-o' 'CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.'
+Linking CXX static library libcmTC_5c7ce.a
+/usr/bin/cmake -P CMakeFiles/cmTC_5c7ce.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5c7ce.dir/link.txt --verbose=1
+/usr/bin/arm-none-eabi-ar qc libcmTC_5c7ce.a CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj
+/usr/bin/arm-none-eabi-ranlib libcmTC_5c7ce.a
+gmake[1]: Leaving directory '/home/cf/ZCU/first_year/winter/OS/practical/ex3/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed CXX implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0]
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0/arm-none-eabi/arm/v5te/hard]
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0/backward]
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/include]
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed]
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0] ==> [/usr/arm-none-eabi/include/c++/12.2.0]
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0/arm-none-eabi/arm/v5te/hard] ==> [/usr/arm-none-eabi/include/c++/12.2.0/arm-none-eabi/arm/v5te/hard]
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0/backward] ==> [/usr/arm-none-eabi/include/c++/12.2.0/backward]
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/include] ==> [/usr/lib/gcc/arm-none-eabi/12.2.0/include]
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed] ==> [/usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed]
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include] ==> [/usr/arm-none-eabi/include]
+  implicit include dirs: [/usr/arm-none-eabi/include/c++/12.2.0;/usr/arm-none-eabi/include/c++/12.2.0/arm-none-eabi/arm/v5te/hard;/usr/arm-none-eabi/include/c++/12.2.0/backward;/usr/lib/gcc/arm-none-eabi/12.2.0/include;/usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed;/usr/arm-none-eabi/include]
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/cf/ZCU/OS/practical/ex3/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_5c7ce/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_5c7ce.dir/build.make CMakeFiles/cmTC_5c7ce.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/cf/ZCU/first_year/winter/OS/practical/ex3/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/usr/bin/arm-none-eabi-g++ -DRPI0=1  -O0 -g -nostartfiles -mfloat-abi=hard -mfpu=vfp -march=armv6zk -mtune=arm1176jzf-s -O0 -g -nostartfiles -mfloat-abi=hard -mfpu=vfp -march=armv6zk -mtune=arm1176jzf-s    -v -o CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-g++]
+  ignore line: [Target: arm-none-eabi]
+  ignore line: [Configured with: ../gcc-12.2.0/configure --prefix=/usr --mandir=/usr/share/man --with-pkgversion='Fedora 12.2.0-1.fc36' --with-bugurl=https://bugzilla.redhat.com/ --infodir=/usr/share/info --target=arm-none-eabi --enable-interwork --enable-multilib --with-python-dir=share/arm-none-eabi/gcc-12.2.0/python --with-multilib-list=rmprofile --enable-plugins --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --disable-tls --enable-languages=c,c++ --with-newlib --disable-nls --disable-shared --disable-threads --with-gnu-as --with-gnu-ld --with-gmp --with-mpfr --with-mpc --with-headers=yes --with-system-zlib --with-sysroot=/usr/arm-none-eabi]
+  ignore line: [Thread model: single]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 12.2.0 (Fedora 12.2.0-1.fc36) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-D' 'RPI0=1' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-o' 'CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_5c7ce.dir/']
+  ignore line: [ /usr/libexec/gcc/arm-none-eabi/12.2.0/cc1plus -quiet -v -imultilib arm/v5te/hard -D__USES_INITFINI__ -D RPI0=1 /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_5c7ce.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mfloat-abi=hard -mfpu=vfp -mfloat-abi=hard -mfpu=vfp -mtune=arm1176jzf-s -marm -mlibarch=armv6zk+fp -march=armv6zk+fp -g -g -O0 -O0 -version -o /tmp/ccNWQwyI.s]
+  ignore line: [GNU C++17 (Fedora 12.2.0-1.fc36) version 12.2.0 (arm-none-eabi)]
+  ignore line: [	compiled by GNU C version 12.2.1 20220819 (Red Hat 12.2.1-1)  GMP version 6.2.1  MPFR version 4.1.0-p13  MPC version 1.2.1  isl version none]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/arm-none-eabi/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/usr/arm-none-eabi/usr/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0/arm-none-eabi/arm/v5te/hard]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include/c++/12.2.0/backward]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/include]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C++17 (Fedora 12.2.0-1.fc36) version 12.2.0 (arm-none-eabi)]
+  ignore line: [	compiled by GNU C version 12.2.1 20220819 (Red Hat 12.2.1-1)  GMP version 6.2.1  MPFR version 4.1.0-p13  MPC version 1.2.1  isl version none]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: e0cb7d52735b2dfdcf53933f754eb815]
+  ignore line: [COLLECT_GCC_OPTIONS='-D' 'RPI0=1' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-o' 'CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_5c7ce.dir/']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/as -v -march=armv6zk+fp -mfloat-abi=hard -mfloat-abi=hard -mfpu=vfp -mfpu=vfp -meabi=5 -o CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj /tmp/ccNWQwyI.s]
+  ignore line: [GNU assembler version 2.39 (arm-none-eabi) using BFD version (Fedora 2.39-1.fc36) 2.39]
+  ignore line: [COMPILER_PATH=/usr/libexec/gcc/arm-none-eabi/12.2.0/:/usr/libexec/gcc/arm-none-eabi/12.2.0/:/usr/libexec/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.0/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/12.2.0/arm/v5te/hard/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/arm/v5te/hard/:/usr/arm-none-eabi/lib/arm/v5te/hard/:/usr/lib/gcc/arm-none-eabi/12.2.0/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/:/usr/arm-none-eabi/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-D' 'RPI0=1' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-o' 'CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.']
+  ignore line: [Linking CXX static library libcmTC_5c7ce.a]
+  ignore line: [/usr/bin/cmake -P CMakeFiles/cmTC_5c7ce.dir/cmake_clean_target.cmake]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5c7ce.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/arm-none-eabi-ar qc libcmTC_5c7ce.a CMakeFiles/cmTC_5c7ce.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_5c7ce.a]
+  ignore line: [gmake[1]: Leaving directory '/home/cf/ZCU/first_year/winter/OS/practical/ex3/build/CMakeFiles/CMakeTmp']
+  ignore line: []
+  ignore line: []
+  implicit libs: []
+  implicit objs: []
+  implicit dirs: []
+  implicit fwks: []
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/cf/ZCU/OS/practical/ex3/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d452a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d452a.dir/build.make CMakeFiles/cmTC_d452a.dir/build
+gmake[1]: Entering directory '/home/cf/ZCU/first_year/winter/OS/practical/ex3/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d452a.dir/CMakeCCompilerABI.c.obj
+/usr/lib64/ccache/arm-none-eabi-gcc -DRPI0=1  -O0 -g -nostartfiles -mfloat-abi=hard -mfpu=vfp -march=armv6zk -mtune=arm1176jzf-s -O0 -g -nostartfiles -mfloat-abi=hard -mfpu=vfp -march=armv6zk -mtune=arm1176jzf-s    -v -o CMakeFiles/cmTC_d452a.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/usr/bin/arm-none-eabi-gcc
+Target: arm-none-eabi
+Configured with: ../gcc-12.2.0/configure --prefix=/usr --mandir=/usr/share/man --with-pkgversion='Fedora 12.2.0-1.fc36' --with-bugurl=https://bugzilla.redhat.com/ --infodir=/usr/share/info --target=arm-none-eabi --enable-interwork --enable-multilib --with-python-dir=share/arm-none-eabi/gcc-12.2.0/python --with-multilib-list=rmprofile --enable-plugins --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --disable-tls --enable-languages=c,c++ --with-newlib --disable-nls --disable-shared --disable-threads --with-gnu-as --with-gnu-ld --with-gmp --with-mpfr --with-mpc --with-headers=yes --with-system-zlib --with-sysroot=/usr/arm-none-eabi
+Thread model: single
+Supported LTO compression algorithms: zlib
+gcc version 12.2.0 (Fedora 12.2.0-1.fc36) 
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-D' 'RPI0=1' '-c' '-o' 'CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.obj' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_09500.dir/'
+ /usr/libexec/gcc/arm-none-eabi/12.2.0/cc1 -quiet -v -imultilib arm/v5te/hard -D__USES_INITFINI__ -D RPI0=1 /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_09500.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mfloat-abi=hard -mfpu=vfp -mfloat-abi=hard -mfpu=vfp -mtune=arm1176jzf-s -marm -mlibarch=armv6zk+fp -march=armv6zk+fp -g -g -O0 -O0 -version -fdiagnostics-color=always -o /tmp/cchR6AK2.s
+GNU C17 (Fedora 12.2.0-1.fc36) version 12.2.0 (arm-none-eabi)
+	compiled by GNU C version 12.2.1 20220819 (Red Hat 12.2.1-1), GMP version 6.2.1, MPFR version 4.1.0-p13, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/arm-none-eabi/usr/local/include"
+ignoring nonexistent directory "/usr/arm-none-eabi/usr/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /usr/lib/gcc/arm-none-eabi/12.2.0/include
+ /usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed
+ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include
+End of search list.
+GNU C17 (Fedora 12.2.0-1.fc36) version 12.2.0 (arm-none-eabi)
+	compiled by GNU C version 12.2.1 20220819 (Red Hat 12.2.1-1), GMP version 6.2.1, MPFR version 4.1.0-p13, MPC version 1.2.1, isl version none
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 05e93becd42bf509bb1eabef7d80c624
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-D' 'RPI0=1' '-c' '-o' 'CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.obj' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_09500.dir/'
+ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/as -v -march=armv6zk+fp -mfloat-abi=hard -mfloat-abi=hard -mfpu=vfp -mfpu=vfp -meabi=5 -o CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.obj /tmp/cchR6AK2.s
+GNU assembler version 2.39 (arm-none-eabi) using BFD version (Fedora 2.39-1.fc36) 2.39
+COMPILER_PATH=/usr/libexec/gcc/arm-none-eabi/12.2.0/:/usr/libexec/gcc/arm-none-eabi/12.2.0/:/usr/libexec/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.0/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/
+LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/12.2.0/arm/v5te/hard/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/arm/v5te/hard/:/usr/arm-none-eabi/lib/arm/v5te/hard/:/usr/lib/gcc/arm-none-eabi/12.2.0/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/:/usr/arm-none-eabi/lib/
+COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-D' 'RPI0=1' '-c' '-o' 'CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.obj' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.'
+Linking C static library libcmTC_d452a.a
+/usr/bin/cmake -P CMakeFiles/cmTC_d452a.dir/cmake_clean_target.cmake
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d452a.dir/link.txt --verbose=1
+/usr/bin/arm-none-eabi-ar qc libcmTC_d452a.a CMakeFiles/cmTC_d452a.dir/CMakeCCompilerABI.c.obj
+/usr/bin/arm-none-eabi-ranlib libcmTC_d452a.a
+gmake[1]: Leaving directory '/home/cf/ZCU/first_year/winter/OS/practical/ex3/build/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/include]
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed]
+    add: [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include]
+  end of search list found
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/include] ==> [/usr/lib/gcc/arm-none-eabi/12.2.0/include]
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed] ==> [/usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed]
+  collapse include dir [/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include] ==> [/usr/arm-none-eabi/include]
+  implicit include dirs: [/usr/lib/gcc/arm-none-eabi/12.2.0/include;/usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed;/usr/arm-none-eabi/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(arm-none-eabi-ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/cf/ZCU/OS/practical/ex3/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d452a/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d452a.dir/build.make CMakeFiles/cmTC_d452a.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/cf/ZCU/first_year/winter/OS/practical/ex3/build/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_d452a.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/usr/lib64/ccache/arm-none-eabi-gcc -DRPI0=1  -O0 -g -nostartfiles -mfloat-abi=hard -mfpu=vfp -march=armv6zk -mtune=arm1176jzf-s -O0 -g -nostartfiles -mfloat-abi=hard -mfpu=vfp -march=armv6zk -mtune=arm1176jzf-s    -v -o CMakeFiles/cmTC_d452a.dir/CMakeCCompilerABI.c.obj -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/arm-none-eabi-gcc]
+  ignore line: [Target: arm-none-eabi]
+  ignore line: [Configured with: ../gcc-12.2.0/configure --prefix=/usr --mandir=/usr/share/man --with-pkgversion='Fedora 12.2.0-1.fc36' --with-bugurl=https://bugzilla.redhat.com/ --infodir=/usr/share/info --target=arm-none-eabi --enable-interwork --enable-multilib --with-python-dir=share/arm-none-eabi/gcc-12.2.0/python --with-multilib-list=rmprofile --enable-plugins --disable-decimal-float --disable-libffi --disable-libgomp --disable-libmudflap --disable-libquadmath --disable-libssp --disable-libstdcxx-pch --disable-nls --disable-shared --disable-threads --disable-tls --enable-languages=c,c++ --with-newlib --disable-nls --disable-shared --disable-threads --with-gnu-as --with-gnu-ld --with-gmp --with-mpfr --with-mpc --with-headers=yes --with-system-zlib --with-sysroot=/usr/arm-none-eabi]
+  ignore line: [Thread model: single]
+  ignore line: [Supported LTO compression algorithms: zlib]
+  ignore line: [gcc version 12.2.0 (Fedora 12.2.0-1.fc36) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-D' 'RPI0=1' '-c' '-o' 'CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.obj' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_09500.dir/']
+  ignore line: [ /usr/libexec/gcc/arm-none-eabi/12.2.0/cc1 -quiet -v -imultilib arm/v5te/hard -D__USES_INITFINI__ -D RPI0=1 /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_09500.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mfloat-abi=hard -mfpu=vfp -mfloat-abi=hard -mfpu=vfp -mtune=arm1176jzf-s -marm -mlibarch=armv6zk+fp -march=armv6zk+fp -g -g -O0 -O0 -version -fdiagnostics-color=always -o /tmp/cchR6AK2.s]
+  ignore line: [GNU C17 (Fedora 12.2.0-1.fc36) version 12.2.0 (arm-none-eabi)]
+  ignore line: [	compiled by GNU C version 12.2.1 20220819 (Red Hat 12.2.1-1)  GMP version 6.2.1  MPFR version 4.1.0-p13  MPC version 1.2.1  isl version none]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/arm-none-eabi/usr/local/include"]
+  ignore line: [ignoring nonexistent directory "/usr/arm-none-eabi/usr/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/include]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/include-fixed]
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C17 (Fedora 12.2.0-1.fc36) version 12.2.0 (arm-none-eabi)]
+  ignore line: [	compiled by GNU C version 12.2.1 20220819 (Red Hat 12.2.1-1)  GMP version 6.2.1  MPFR version 4.1.0-p13  MPC version 1.2.1  isl version none]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 05e93becd42bf509bb1eabef7d80c624]
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-D' 'RPI0=1' '-c' '-o' 'CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.obj' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_09500.dir/']
+  ignore line: [ /usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/as -v -march=armv6zk+fp -mfloat-abi=hard -mfloat-abi=hard -mfpu=vfp -mfpu=vfp -meabi=5 -o CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.obj /tmp/cchR6AK2.s]
+  ignore line: [GNU assembler version 2.39 (arm-none-eabi) using BFD version (Fedora 2.39-1.fc36) 2.39]
+  ignore line: [COMPILER_PATH=/usr/libexec/gcc/arm-none-eabi/12.2.0/:/usr/libexec/gcc/arm-none-eabi/12.2.0/:/usr/libexec/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.0/:/usr/lib/gcc/arm-none-eabi/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/arm-none-eabi/12.2.0/arm/v5te/hard/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/arm/v5te/hard/:/usr/arm-none-eabi/lib/arm/v5te/hard/:/usr/lib/gcc/arm-none-eabi/12.2.0/:/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/lib/:/usr/arm-none-eabi/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp' '-O0' '-g' '-nostartfiles' '-mfloat-abi=hard' '-mfpu=vfp'  '-mtune=arm1176jzf-s' '-v' '-D' 'RPI0=1' '-c' '-o' 'CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.obj' '-marm' '-mlibarch=armv6zk+fp' '-march=armv6zk+fp' '-dumpdir' 'CMakeFiles/cmTC_09500.dir/CMakeCCompilerABI.c.']
+  ignore line: [Linking C static library libcmTC_d452a.a]
+  ignore line: [/usr/bin/cmake -P CMakeFiles/cmTC_d452a.dir/cmake_clean_target.cmake]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d452a.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/arm-none-eabi-ar qc libcmTC_d452a.a CMakeFiles/cmTC_d452a.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [/usr/bin/arm-none-eabi-ranlib libcmTC_d452a.a]
+  ignore line: [gmake[1]: Leaving directory '/home/cf/ZCU/first_year/winter/OS/practical/ex3/build/CMakeFiles/CMakeTmp']
+  ignore line: []
+  ignore line: []
+  implicit libs: []
+  implicit objs: []
+  implicit dirs: []
+  implicit fwks: []
+
+

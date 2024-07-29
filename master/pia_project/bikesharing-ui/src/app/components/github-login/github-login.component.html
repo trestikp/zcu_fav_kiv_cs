@@ -1,0 +1,11 @@
+<div class="container-fluid d-flex justify-content-center">
+
+  <div class="alert alert-success mt-2" role="alert" *ngIf="loginSuccess">
+    Successfully logged in via GitHub. Redirecting to home page...
+  </div>
+
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="!loginSuccess">
+    Failed to log in via GitHub. Error: {{ errorCode }} - {{ errorMessage }}
+  </div>
+
+</div>

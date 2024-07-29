@@ -1,0 +1,10 @@
+- program is run: java -jar trestikp_rest-1.0-jar-with-dependencies.jar
+	- the jar require "run_soapui.sh" script to be present in the same directory to be run
+	- written and tested with java 17
+- run_soapui.sh can be modified
+	- script launcher SoapUI testrunner.sh script
+	- first modification might be entering valid path to this script
+		- this change will PROBABLY BE REQUIRED
+	- launching this script takes .xml file as parameter with the SoapUI project
+	- second modification might be path to this file
+		- this project file is present in soapui_project and by default doesn't need to be changed

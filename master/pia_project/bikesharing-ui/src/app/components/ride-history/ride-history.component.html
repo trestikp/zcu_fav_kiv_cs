@@ -1,0 +1,52 @@
+<div class="container-fluid d-flex justify-content-center">
+
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="failedLoad">
+    Failed to load data. Try refreshing the page or contact the administrator.
+  </div>
+
+  <div *ngIf="!failedLoad" class="d-flex justify-content-center">
+    <div *ngIf="hasData" class="table_div">
+      <table mat-table [dataSource]="rides">
+
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let ride; let i = index"> {{ i + 1 }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="startTime">
+          <th mat-header-cell *matHeaderCellDef>Start time</th>
+          <td mat-cell *matCellDef="let ride"> {{ ride.startTime }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endTime">
+          <th mat-header-cell *matHeaderCellDef>End time</th>
+          <td mat-cell *matCellDef="let ride"> {{ ride.endTime }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="startLocationName">
+          <th mat-header-cell *matHeaderCellDef>Start stand</th>
+          <td mat-cell *matCellDef="let ride"> {{ ride.startLocationName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="endLocationName">
+          <th mat-header-cell *matHeaderCellDef>End stand</th>
+          <td mat-cell *matCellDef="let ride"> {{ ride.endLocationName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="bikeId">
+          <th mat-header-cell *matHeaderCellDef>Used bike ID</th>
+          <td mat-cell *matCellDef="let ride"> {{ ride.bike.id  }} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-warning mt-2" role="alert" *ngIf="!hasData">
+      You don't have any rides yet. Nothing to display.
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,13 @@
+var a;
+
+procedure pr;
+var b;
+begin
+  a:=10;
+  b:=20;
+end;
+
+begin
+  a:=100;
+  call pr;
+end.

@@ -1,0 +1,25 @@
+var a, i;
+
+procedure pr1;
+var b;
+	
+  procedure pr2;
+  var c;
+  begin
+    c:=11;
+    b:=22;
+    a:=33;
+    i:=i+100;
+    while i<300 do call pr2;
+  end;
+
+begin
+  a:=10;
+  b:=20;
+  call pr2;
+end;
+
+begin
+  i:=0;
+  call pr1;
+end.

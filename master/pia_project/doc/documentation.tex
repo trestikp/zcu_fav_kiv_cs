@@ -1,0 +1,148 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[czech]{babel}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{textcomp}
+\usepackage{array}
+%%%
+%%%
+\begin{document}
+%%%
+%%% TITLE PAGE
+%%%
+\begin{titlepage}
+\centerline{\includegraphics[width=10cm]{img/logo}}
+\begin{center}
+\vspace{30px}
+{\huge
+\textbf{Programování Internetových aplikací}\\
+\vspace{1cm}
+}
+{\Large
+\textbf{KIV/PIA-E}\\
+\vspace{1cm}
+}
+{\large
+\textbf{Bikesharing platform}\\
+\vspace{1cm}
+}
+\vspace{1cm}
+{\large
+Pavel Třeštík\\
+}
+{\normalsize
+A23N0001P
+}
+\end{center}
+\vspace{\fill}
+\hfill
+\begin{minipage}[t]{7cm}
+\flushright
+\today
+\end{minipage}
+\end{titlepage}
+%%%
+%%% TEXT START
+%%%
+\section{Realizace projektu}
+Projekt se skládá z modulů backendu a frontendu. Navíc jsou použity služby ActiveMQ pro komunikaci klientů a serveru
+a MySQL databáze.
+\subsection{Backend}
+Backend je jeden samostatný modul. Jedná se tedy o monolit, což bylo záměrně zvoleno s ohledem na to, že projekt není
+příliš rozsáhlý. Struktura modulu je pak dělena na 3 vrstvy: data, business (logic), presentation (communication).
+Ačkoliv je modul monolit, tak použitá 3 vrstvová architektura stále zaručuje rozumnou strukturu projektu.
+
+Produkt je implementován použitím Java17, Spring Boot 3 a Flyway. K backendu je také potřeba databáze, která využívá
+MySQL docker image. Celý projekt je pak sestavěn nástrojem Maven. Navíc je také použito několik knihoven třetích stran.
+%
+\subsubsection{Konfigurace}
+Backend umožňuje konfiguraci důležitých property použitím konfiguračních souborů, které Spring načítá.
+Jedná se o soubory \texttt{bikesharing-backend/src/
+main/resources/application.properties} a 
+\texttt{bikesharing-backend/src/
+main/resources/application.yaml}. Jednotlivé property, které je možné konfigurovat jsou
+okomentované v souborech, případně jejich jméno by mělo jasně vypovídat o jejich účelu.
+
+Flyway také používá skripty z adresáře \texttt{bikesharing-backend/src/main/
+resources/db/migration}. Zde jsou 2 skripty,
+první inicializuje strukturu databáze a druhý inicializuje základní data, která mohou být použita k testování aplikace.
+%
+\subsection{Frontend}
+Frontend je také samostatný modul. Protože frontend je implementovaný využitím Angular 17, tak je dodržena struktura 
+projektu, kterou vygeneruje Angular příkaz pro založení projektu. Tato struktura odděluje komponenty 
+(view vrsta z šablony, stylů a příslušné obsluhy), service a model.
+
+Kromě čístého Angular 17 jsou použity knihovny rozšiřujích Angular například o tabulky. Jsou použity i knihovny 
+třetích stran, například Leaflet pro zobrazovnání map a markerů.
+%
+\subsubsection{Konfigurace}
+Frontend také má konfigurační soubor, pro umožnění dynamického nastavení. Například aby se klient mohl připojit na jiný
+backend server. Jedná se o soubor \texttt{bikesharing-ui/src/environments/environment.prod.ts}.
+%
+\subsection{Další technologie}
+Pro databázi je využito MySQL 8. Pro MQ je využito Apache ActiveMQ. Pro build a nasazení práce je použit Docker, resp.
+docker-compose. Respektive alternativa dockeru Podman, ovšem tyto nástroje jsou téměř zaměnitelné, takže funkčnost by
+měla být stejná.
+
+Každý modul práce a technologie má vlastní kontajner, takže výsldek jsou tedy 4 kontajnery: bikesharing-backend, 
+bikesharing-ui, mysql a activemq.
+%%%
+%%% 
+%%%
+\section{Spuštění}
+Tento proces je také popsán v README, trochu stručněji.
+
+Build a spuštění by měl být jedním příkazem: \textbf{podman-compose up --build} (resp. docker). Tento příkaz vybuildí
+image pro backend a frontend projektu. Poté spustí tyto image navíc s MySQL a ActiveMQ imagi. Spuštění všech kontejnerů
+do naběhnutého stavu může zabrat několik desítek vteřit. Build je v rámci jednotek minut.
+
+Po spuštění by pak měla být aplikace dostupná na adrese \url{http://localhost:4200}, za předpokladu, že je použita
+výchozí konfigurace. Je doporučené zachovat tuto adresu, protože GitHub OAuth2 aplikace vyžaduje adresu, na kterou se
+má přesměrovat po úspěšné authentikaci. Ačkoliv je možné tuto adresu konfigurovat soubory, tak je adresa vázána na 
+GitHub aplikaci a při změně by tato adres přestala odpovídat a GitHub by tím pádem zamítl jakýkoliv request. Je ovšem
+možné vytvořit si vlastní GitHub aplikaci pro authentikaci, kde se zadá jiná adresa aplikace a po změně konfigurace 
+pak bude fungovat nová adresa.
+%
+\subsection{Problém buildu frontend image}
+Při vývoji se objevil jeden problém s buildem frontend image. Tento problém nastává při kroku \textbf{npm install},
+kdy tento krok "běží do nekonečna". Není znám důvod problému a nastává pouze v jedné specifické internetové
+síti, takže problém by pravděpodobně neměl nastat. 
+
+Problém je možné obejít tím, že se \textbf{npm install} provede na host stroji. Tedy změnit adresář do 
+\texttt{bikesharing-ui} a spustit \texttt{npm install}. Předpoklad je, že na host stroji je dostupný nástroj 
+\texttt{npm}.
+%%%
+%%%
+%%%
+\section{Použití}
+Tento proces je také popsán v README, trochu stručněji. Podobný návod je také na stránce "About" aplikace.
+
+Hlavní stránkou aplikace je mapa. Na této mapě jsou zobrazeny standy pomocí markeru. Světle modré markery s číslem
+jsou standy, které mají kola a může z nich započít jízda. Oranžové markery jsou standy bez kol a mohou jízdu pouze
+přijmout.
+
+Při zahájení jízdy je na mapě modře znázorněna cesta jízdy a zelený marker s kolem, který simuluje uživatelovo jízdu
+po zvýrazněné cestě. Probíhající jízda se zobrazuje všem klientům jako šedý marker s kolem.
+
+Standy a pozorování probíhajících jízd jsou zobrazeny všem uživatelům. Pro správně vyzkoušení je doporučeno
+otevřít alespoň 2 okna s klientem a alespoň v jednom spustit jízdu.
+
+Spouštění jízdy je prováděno ze stránky z mapou, kdy po přihlášení se uživately zobrazí 2 select boxy a tlačítko pro
+spuštění jízdy.
+
+Pokud je uživatel přihlášen, tak si může zobrazit seznam svých jízd na stránce "Past rides".
+
+Pokud je přihlášený uživatel navíc SERVICEMAN, tak může zobrazit seznam kol, které potřebují servisovat a v tomto
+seznamu je může označit jako servisované.
+
+Pro testování jsou poskytnuti 2 uživatelé \textbf{test} a \textbf{test2}, který má navíc roli SERVICEMAN. 
+Oba uživatelé mají heslo \textbf{test123}.
+%
+\end{document}

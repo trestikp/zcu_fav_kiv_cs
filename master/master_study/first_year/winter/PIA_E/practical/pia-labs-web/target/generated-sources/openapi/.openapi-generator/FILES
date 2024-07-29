@@ -1,0 +1,11 @@
+.openapi-generator-ignore
+README.md
+pom.xml
+src/main/java/cz/zcu/kiv/pia/labs/chat/rest/api/ApiUtil.java
+src/main/java/cz/zcu/kiv/pia/labs/chat/rest/api/MessagesApi.java
+src/main/java/cz/zcu/kiv/pia/labs/chat/rest/api/RoomsApi.java
+src/main/java/cz/zcu/kiv/pia/labs/chat/rest/api/UsersApi.java
+src/main/java/cz/zcu/kiv/pia/labs/chat/rest/model/MessageVO.java
+src/main/java/cz/zcu/kiv/pia/labs/chat/rest/model/ProblemVO.java
+src/main/java/cz/zcu/kiv/pia/labs/chat/rest/model/RoomVO.java
+src/main/java/cz/zcu/kiv/pia/labs/chat/rest/model/UserVO.java

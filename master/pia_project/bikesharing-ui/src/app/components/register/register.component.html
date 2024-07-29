@@ -1,0 +1,89 @@
+<form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+
+  <div class="form-group">
+    <label for="username">Username*</label>
+    <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3"
+           maxlength="20" #username="ngModel" [ngClass]="{ 'is-invalid': f.submitted && username.errors }"/>
+    @if (username.errors && f.submitted) {
+      <div class="invalid-feedback">
+        @if (username.errors['required']) {
+          <div>Username is required</div>
+        }
+        @if (username.errors['minlength']) {
+          <div>Username must be at least 3 characters</div>
+        }
+        @if (username.errors['maxlength']) {
+          <div>Username must be at most 20 characters</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="name">Full name</label>
+    <input type="text" class="form-control" name="name" [(ngModel)]="form.name" #name="ngModel"/>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email*</label>
+    <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel"
+           [ngClass]="{ 'is-invalid': f.submitted && email.errors }"/>
+    @if (email.errors && f.submitted) {
+      <div class="invalid-feedback">
+        @if (email.errors['required']) {
+          <div>Email is required</div>
+        }
+        @if (email.errors['email']) {
+          <div>Email must be a valid email address</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password*</label>
+    <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6"
+           #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.errors }"
+           pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+"/>
+    @if (password.errors && f.submitted) {
+      <div class="invalid-feedback">
+        @if (password.errors['required']) {
+          <div>Password is required</div>
+        }
+        @if (password.errors['minlength']) {
+          <div>Password must be at least 6 characters</div>
+        }
+        @if (password.errors['pattern']) {
+          <div>Password must have at least 1 upper letter, 1 lower letter and 1 number</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="passwordVerification">Password confirmation*</label>
+    <input type="password" class="form-control" name="passwordVerification" [(ngModel)]="form.passwordVerification"
+           required #passwordVerification="ngModel" appPasswordConfirmation
+           [ngClass]="{ 'is-invalid': f.submitted && passwordVerification.errors }"/>
+    @if (passwordVerification.errors && f.submitted) {
+      <div class="invalid-feedback">
+        @if (passwordVerification.errors['required']) {
+          <div>Password confirmation is required</div>
+        }
+        @if (passwordVerification.errors['mismatch']) {
+          <div>Passwords don't match</div>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="form-group">
+    <button class="btn btn-primary btn-block mt-2">Sign Up</button>
+  </div>
+
+  @if (f.submitted && isSignUpFailed) {
+    <div class="alert alert-warning mt-2">
+      Signup failed!<br />{{ errorMessage }}
+    </div>
+  }
+</form>

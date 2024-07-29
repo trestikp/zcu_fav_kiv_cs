@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" class="p-0 m-0">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Překladač do PL0</title>
+
+    <!-- Load config file first -->
+    <script src="script/config.js"></script>
+
+    <link rel="stylesheet" href="lib/bs5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bsicons/bootstrap-icons.css">
+    <link rel="stylesheet" href="style/style.css">
+    
+    <script src="lib/bs5/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/jquery/jquery.min.js"></script>
+    
+    <!-- Monaco editor-->
+    <script>
+        var require = { paths: { vs: 'lib/monaco' } };
+    </script>
+    <script src="lib/monaco/loader.js"></script>
+    <script src="lib/monaco/editor/editor.main.nls.js"></script>
+    <script src="lib/monaco/editor/editor.main.js"></script>
+    
+    <script src="script/resizer.js"></script>
+    <script src="script/modeSwitch.js"></script>
+    <script src="script/parser.js"></script>
+    <script src="script/examples.js"></script>
+    <script src="script/compiler/recursive_descent.js"></script>
+    <script src="script/compiler/tokenizer.js"></script>
+    <script src="script/test/testRunner.js"></script>
+</head>
+<body class="d-flex flex-column">
+    <!-- Navbar -->
+    <nav class="navbar navbar-toggleable-md bg-dark">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-row">
+            <li class="nav-item">
+                <button class="btn btn-success my-2 my-sm-0 ms-2" type="submit" data-bs-toggle="modal" data-bs-target="#uploadOverwriteModal">
+                    <i class="bi bi-cloud-upload-fill"></i>
+                </button>
+                <input id="upload" type=file accept=".txt" name="files[]" size=30 style="display: none;">
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-success my-2 my-sm-0 ms-2" type="submit" onclick="Parser.parse()">
+                    <i class="bi bi-play-fill"></i>
+                </button>
+            </li>
+            <li class="nav-item my-2 my-sm-0 ms-2">
+                <select id="exampleSelector" class="form-control">
+                </select>
+            </li>
+            <li class="nav-item my-2 my-sm-0 ms-2">
+                <button class="btn btn-success" type="button" onclick="Examples.loadExample()">Load example</button>
+            </li>
+        </ul>
+        <button class="btn btn-success me-2 my-sm-0" type="submit" onclick="TestRunner.runAllTests()">
+            Run tests
+        </button>
+        <button class="btn btn-warning me-2 my-sm-0 dark" type="submit" id="switchModeBtn">
+            <i class="bi bi-brightness-high"></i>
+        </button>
+        <button class="btn btn-danger me-2 my-sm-0 shown" type="submit" id="showTermBtn" onclick="Parser.showTerminal()">
+            <i class="bi bi-terminal-fill"></i>
+        </button>
+        <button class="btn btn-success me-2 my-sm-0" type="submit" id="showDebugBtn" class="hidden" onclick="Parser.debug()">
+            <i class="bi bi-bug-fill"></i>
+        </button>
+        <button class="btn btn-success me-2 my-sm-0" type="submit" onclick="Parser.download()">
+            <i class="bi bi-cloud-download-fill"></i>
+        </button>
+        <button class="btn btn-success me-2 my-sm-0" type="submit" id="copyButton" onclick="Parser.copyToClipboard()">
+            <i class="bi bi-clipboard-fill"></i>
+        </button>
+        </form>
+    </nav>
+    <!-- Editor -->
+    <div class="d-flex flex-column flex-grow middle-editor">
+        <div class="d-flex editor flex-grow w-100 h-100 flex-row" style="overflow: hidden;">
+            <div class="left">
+                <div id="editor-in" class="editor w-100 h-100 px-2 py-2 text-light bg-dark">
+
+                </div>
+            </div>
+            <div class="resize resize-editor h-100 bg-dark" id="resize"></div>
+            <div class="right h-100">
+                <textarea id="editor-out" class="editor w-100 h-100 px-2 py-2 text-light bg-dark" disabled>
+0  JMP         0        13
+1  JMP         0         2
+2  INT         0         3
+3  LOD         1         3
+4  LIT         0         1
+5  OPR         0         2
+6  STO         1         3
+7  LOD         1         3
+8  LIT         0         2
+9  OPR         0        13
+10  JMC         0        12
+11  CAL         1         2
+12  RET         0         0
+13  INT         0         4
+14  LIT         0         0
+15  STO         0         3
+16  CAL         0         2
+17  RET         0         0
+                </textarea>
+            </div>
+         </div>
+    </div>
+    <!-- Terminal -->
+    <div class="resize resize-terminal w-100 bg-dark terminalElement" id="resizeTerminal"></div>
+    <div class="terminal w-100 editor terminalElement">
+        <div id="editor-terminal" class="editor w-100 h-100 px-2 py-2 text-light bg-dark"></div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="uploadOverwriteModal" tabindex="-1" aria-labelledby="uploadOverwriteLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="uploadOverwriteLabel">Overwrite existing?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                This will overwrite all code that is already in the input window. Do you want to continue?
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No, go back to the editor.</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="Parser.upload()">Yes, upload!</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="testResultsModal" tabindex="-1" aria-labelledby="testResultsLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="testResultsLabel">Test results</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <iframe id="debuggerIframe" class="debugger">
+
+    </iframe>
+</body>
+</html>

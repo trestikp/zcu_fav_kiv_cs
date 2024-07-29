@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="cz">
+<div class="container">
+<head>
+    <meta charset="UTF-8">
+    <title>Herní konference</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/login_form_actions.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/post_form_actions.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/review_actions.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/active_nav_link.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/r_assignment.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/r_management.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/r_management.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/user_management.js"></script>
+    <script type="text/javascript" src="/web_semestral/app/controller/js/general.js"></script>
+    <!--<script-->
+            <!--src="https://code.jquery.com/jquery-3.4.1.js"-->
+            <!--integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="-->
+            <!--crossorigin="anonymous"></script>-->
+
+    <link rel="stylesheet" href="/web_semestral/public/css/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/web_semestral/public/css/bootstrap-4.3.1-dist/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="/web_semestral/public/css/bootstrap-4.3.1-dist/css/bootstrap-reboot.css">
+    <link rel="stylesheet" href="/web_semestral/public/css/default.css">
+</head>
+
+<header class="border mt-2">
+    <div class="row mt-1 mb-1" style="min-height: 20ex;display: flex;align-items:center">
+
+        <div class="col-6 ml-4 container">
+            <h1>Konference o hrách</h1>
+        </div>
+
+        <div class="col-auto mr-5 container">
+            {{ log_form | raw }}
+            <span id="log_error" style="color: red"></span>
+        </div>
+    </div>
+</header>
+
+<body id="body">
+<div class="row ml-0 mr-0 mt-2 mb-2" style="min-height: 400px">
+    <div class="col-3">
+        <nav class="nav nav-pills">
+            <ul id="navigation">
+                {{ nav | raw }}
+            </ul>
+        </nav>
+    </div>
+
+    <div class="border-left col-9 float-right" id="obsah">
+        {{ obsah | raw }}
+    </div>
+</div>
+</body>
+
+<footer>
+    <p>Copyright © Pavel Třeštík</p>
+</footer>
+
+</div>
+</html>

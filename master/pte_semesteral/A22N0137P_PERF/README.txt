@@ -1,0 +1,5 @@
+- data_bin - contains jar that can be run to create data for ES
+- data_source - source files for the project
+- es_datamodel - contains single file, that holds mapping for ES model
+- kibana_dashboard - exported dashboard from kibana
+- kibana_screen	- screenshot(s) of the dashboard

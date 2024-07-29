@@ -1,0 +1,662 @@
+openapi: 3.0.3
+
+info:
+  title: PIA-E Bikesharing Project
+  description: PIA-E Bikesharing Project
+  version: 1.0.0
+
+tags:
+  - name: auth
+    description: User authentication
+  - name: bike
+    description: All bike related operations
+  - name: stand
+    description: All stand related operations
+  - name: ride
+    description: All ride related operations
+
+paths:
+
+  /stand:
+    get:
+      tags:
+        - stand
+      summary: Retrieves all stands currently in the system
+      operationId: retrieveStands
+      responses:
+        '200':
+          description: All existing stands in response with related information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/StandDTO'
+        '204':
+          description: No stands in the system
+        '405':
+          description: Not supported HTTP method
+        '500':
+          description: Server error
+
+  /stand/{standId}/bike:
+    get:
+      tags:
+        - stand
+      summary: Get a bike from stand for a ride
+      operationId: getBikeFromStand
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Bearer token (JWT) for authentication
+        - name: standId
+          in: path
+          required: true
+          description: Unique stand identifier.
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Bike that is ready for ride
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BikeDTO'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Stand doesn't exist
+        '405':
+          description: Not supported HTTP method
+        '406': # really don't know what code to use (most sense is 204, but the request should show that it failed)
+          description: No bike available
+        '418':
+          description: Invalid/ expired token
+        '500':
+          description: Server error
+
+  /bike/{bikeId}/location:
+    parameters:
+      - in: header
+        name: Authorization
+        schema:
+          type: string
+        required: true
+        description: Bearer token (JWT) for authentication
+      - name: bikeId
+        in: path
+        required: true
+        description: Unique bike identifier.
+        schema:
+          type: string
+          format: uuid
+    post:
+      tags:
+        - bike
+      summary: Moves bike with given ID to a new location
+      operationId: moveBike
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocationDTO"
+        required: true
+      responses:
+        '200':
+          description: Bike location is updated
+        '400':
+          description: Coordinates are not formatted correctly
+        '404':
+          description: Bike does not exist
+        '405':
+          description: Not supported HTTP method
+        '406':
+          description: Not acceptable response representation
+        '409':
+          description: Bike does not belong to any started ride
+        '418':
+          description: Invalid/ expired token
+        '500':
+          description: Server error
+
+  /bike/serviceable:
+    get:
+      tags:
+        - bike
+      summary: Retrieves all bikes that are currently due for service
+      operationId: retrieveServiceableBikes
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Bearer token (JWT) for authentication
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: All bikes due for service. Empty array if none
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BikeDTO'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '405':
+          description: Not supported HTTP method
+        '418':
+          description: Invalid/ expired token
+        '500':
+          description: Server error
+
+  /bike/{bikeId}/service:
+    post:
+      tags:
+        - bike
+      summary: Mark the bike with given ID as serviced
+      operationId: markBikeAsServiced
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Bearer token (JWT) for authentication
+        - name: bikeId
+          in: path
+          required: true
+          description: Unique bike identifier.
+          schema:
+            type: string
+            format: uuid
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Bike was marked as serviced
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '405':
+          description: Not supported HTTP method
+        '418':
+          description: Invalid/ expired token
+        '422':
+          description: Bike is not serviceable (not in stand or not due for service yet)
+        '500':
+          description: Server error
+
+  /ride:
+    get:
+      tags:
+        - ride
+      summary: Retrieves all users rides.
+      operationId: retrieveRides
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Bearer token (JWT) for authentication
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: All existing rides in response with related information
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RideDTO'
+        '204':
+          description: User has no rides
+        '401':
+          description: Unauthorized
+        '405':
+          description: Not supported HTTP method
+        '418':
+          description: Invalid/ expired token
+        '500':
+          description: Server error
+
+  /ride/start:
+    post:
+      tags:
+        - ride
+      summary: Starts a new ride
+      operationId: startRide
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Bearer token (JWT) for authentication
+      security:
+        - bearerAuth: [ ]
+      requestBody:
+        description: Ride needs to know starting point, bike and optionally destination
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimplifiedRideDTO'
+      responses:
+        '200':
+          description: Ride started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RideDTO'
+        '401':
+          description: Unauthorized
+        '405':
+          description: Not supported HTTP method
+        '418':
+          description: Invalid/ expired token
+        '422':
+          description: At least one entity of the ride is not in a state, to be able to start a new ride
+        '500':
+          description: Server error
+
+  /ride/{rideId}/complete:
+    post:
+      tags:
+        - ride
+      summary: Complete the ride if there is a stand within 50m
+      operationId: completeRide
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+          required: true
+          description: Bearer token (JWT) for authentication
+        - name: rideId
+          in: path
+          required: true
+          description: UUID of the ride
+          schema:
+            type: string
+            format: uuid
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Body containing necessary information to modify all objects involved in the ride
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimplifiedRideDTO'
+      responses:
+        '200':
+          description: Ride successfully completed
+        '401':
+          description: Unauthorized
+        '405':
+          description: Not supported HTTP method
+        '412':
+          description: No stand within 50m
+        '418':
+          description: Invalid/ expired token
+        '422':
+          description: At least one entity of the ride is not in a state, to be able to complete the ride
+        '500':
+          description: Server error
+
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: Login user
+      operationId: loginUser
+      requestBody:
+        description: User login form data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginForm'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginForm'
+      responses:
+        '200':
+          description: Successfully logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Failed to authenticate user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JWTAuthFailure'
+
+  /auth/github:
+    get:
+      tags:
+        - auth
+      summary: Login user via Github OAuth
+      operationId: githubLoginUser
+      parameters:
+        - in: query
+          name: code
+          schema:
+            type: string
+          required: true
+          description: Github OAuth code
+      responses:
+        '200':
+          description: Successfully logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '401':
+          description: Github authentication failed
+        '500':
+          description: Server failed to register Github user
+
+  /auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register new user
+      operationId: registerUser
+      requestBody:
+        description: User registration form data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationForm'
+      responses:
+        '200':
+          description: Successfully registered user
+          content:
+            application/json:
+              schema:
+                type: object
+                nullable: true
+        '409':
+          description: Some user information is not unique
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericErrorResponse'
+        '500':
+          description: Unexpected server error
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    LoginForm:
+      type: object
+      description: Form data for user login
+      properties:
+        username:
+          type: string
+          description: Username
+          example: "testUser"
+        password:
+          type: string
+          description: Password
+          example: "testSecret"
+      required:
+        - username
+        - password
+
+    RegistrationForm:
+      type: object
+      description: Form data for user registration
+      properties:
+        name:
+          type: string
+          description: Full name of the user. Optional
+          example: "John Doe"
+        username:
+          type: string
+          description: Username
+          example: "testUser"
+        password:
+          type: string
+          description: Password
+          example: "testSecret"
+        email:
+          type: string
+          description: Email address
+          example: "test@admin.com"
+      required:
+        - username
+        - password
+        - email
+
+    AuthResponse:
+      type: object
+      description: Response to login action
+      properties:
+        message:
+          type: string
+          description: Message about the authentication status. Can contain reason for failure
+          example: "Login successful"
+        token:
+          type: string
+          description: The session JWT token
+          example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+        user:
+          $ref: '#/components/schemas/AuthResponseUser'
+
+    AuthResponseUser:
+      type: object
+      description: User object that is embedded into AuthResponse holding small subset of user data
+      properties:
+        username:
+          type: string
+          description: Name of the user
+          example: "testUser"
+        roles:
+          type: array
+          description: Roles of the user. Typically only 1 role is expected
+          items:
+            description: Name of the role
+            type: string
+            example: "REGULAR"
+
+    GenericErrorResponse:
+      type: object
+      description: Generic error response containing error as array of {code, message} pairs
+      properties:
+        messages:
+          type: array
+          description: Array of Error objects
+          items:
+            $ref: '#/components/schemas/GenericErrorItem'
+          required:
+            - messages
+
+    GenericErrorItem:
+      type: object
+      description: Error object
+      properties:
+        code:
+          type: string
+          description: Code of the error
+          example: "USERNAME"
+        message:
+          type: string
+          description: Message about the error
+          example: "Username is already taken"
+      required:
+        - code
+        - message
+
+    StandDTO:
+      type: object
+      description: Stand object for storing bikes and starting/ finishing rides
+      properties:
+        id:
+          description: Unique identifier of the stand
+          type: string
+          format: uuid
+        name:
+          description: Name of the stand (Usually location name)
+          type: string
+        location:
+          $ref: '#/components/schemas/LocationDTO'
+        availableBikes:
+          description: Number of bikes currently available at the stand
+          type: integer
+          format: int32
+          default: 0
+      required:
+        - id
+        - name
+        - location
+        - availableBikes
+
+    LocationDTO:
+      description: Geographic coordinates of a location
+      type: object
+      properties:
+        longitude:
+          description: Longitude of the location, max precision of 6 decimal places
+          type: number
+          format: double
+        latitude:
+          description: Latitude of the location, max precision of 6 decimal places
+          type: number
+          format: double
+      required:
+        - longitude
+        - latitude
+
+    BikeDTO:
+      type: object
+      description: Bike object for transferring information about bikes
+      properties:
+        id:
+          description: Unique identifier of the bike
+          type: string
+          format: uuid
+        lastServiceDate:
+          description: Date when the bike was last serviced
+          type: string
+          format: date-time
+          nullable: true
+        location:
+          $ref: '#/components/schemas/LocationDTO'
+        stand:
+          $ref: '#/components/schemas/StandDTO'
+      required:
+        - id
+        - name
+        - location
+        - stand
+        - lastServiceDate
+
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        email:
+          type: string
+      required:
+        - id
+        - username
+        - email
+
+    SimplifiedRideDTO:
+      type: object
+      description: Ride object for storing information about rides (both started and finished)
+      properties:
+        startStandId:
+          description: Unique identifier of the stand where the ride started
+          type: string
+          format: uuid
+        endStandId:
+          description: Unique identifier of the stand where the ride ended
+          type: string
+          format: uuid
+        bikeId:
+          description: Unique identifier of the bike used for the ride
+          type: string
+          format: uuid
+      required:
+        - startStandId
+        - endStandId
+        - bikeId
+
+    RideDTO:
+      type: object
+      description: Ride object for storing information about rides (both started and finished)
+      properties:
+        id:
+          description: Unique identifier of the ride
+          type: string
+          format: uuid
+        startTime:
+          description: Time when the ride started
+          type: string
+          format: date-time
+        endTime:
+          description: Time when the ride ended
+          type: string
+          format: date-time
+        startLocationName:
+          description: Name of the stand where the ride started
+          type: string
+        endLocationName:
+          description: Name of the stand where the ride ended
+          type: string
+        startLocation:
+          $ref: '#/components/schemas/LocationDTO'
+        endLocation:
+          $ref: '#/components/schemas/LocationDTO'
+        bike:
+          $ref: '#/components/schemas/BikeDTO'
+        user:
+          $ref: '#/components/schemas/UserDTO'
+      required:
+        - id
+        - startTime
+        - startLocation
+        - startLocationName
+        - bike
+        - user
+
+    JWTAuthFailure:
+      type: object
+      description: JWT authentication failure response
+      properties:
+        status:
+          type: integer
+          format: int32
+          example: 401
+        message:
+          type: string
+          example: "Username not found."
+        error:
+          type: string
+          example: "Unauthorized"
+        path:
+          type: string
+          example: "/api/auth/login"

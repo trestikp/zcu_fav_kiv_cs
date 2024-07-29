@@ -1,0 +1,7 @@
+- jenom prekladac pl/0 jak je je moc jednoduchy
+- rozsirit napr. o "else", parametry pro proceduru, objekty, apod.
+	- pozor! - zachovat zpetnou kompatibilitu na puvodni pl/0
+- udelat pekne gui
+	- zvyraznovani syntaxe, podtrhavani chyb, integrace na debugger (z loni)
+- nemusi nutne byt rozsireni i gui - muze byt vetsi focus na jednu z tech casti
+- nejdrive navrh probrat - rekne na kolik bodu by to bylo

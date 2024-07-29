@@ -1,0 +1,80 @@
+<div>
+    <h3>Hodnocení</h3>
+    <p>
+        <form id="review_form" type="POST">
+            <table class="w-100">
+                <tr>
+                    <td class="float-left">
+                        <b>Jazyková úroveň: </b>
+                        <select class="selector" name="criterium_1" id="criterium_1" required>
+                            <option disabled selected value> -- zvolte -- </option>
+                            <option value="1">Výborný</option>
+                            <option value="2">Dostatečný</option>
+                            <option value="3">Neutrální</option>
+                            <option value="4">Nedostatečný</option>
+                            <option value="5">Špatný</option>
+                        </select>
+
+                        <br>
+                        <b>Téma: </b>
+                        <select class="selector" name="criterium_2" id="criterium_2" required>
+                            <option disabled selected value> -- zvolte -- </option>
+                            <option value="1">Výborný</option>
+                            <option value="2">Dostatečný</option>
+                            <option value="3">Neutrální</option>
+                            <option value="4">Nedostatečný</option>
+                            <option value="5">Špatný</option>
+                        </select>
+                        <br>
+                        <b>Kvalita obsahu: </b>
+                        <select class="selector" name="criterium_3" id="criterium_3" required>
+                            <option disabled selected value> -- zvolte -- </option>
+                            <option value="1">Výborný</option>
+                            <option value="2">Dostatečný</option>
+                            <option value="3">Neutrální</option>
+                            <option value="4">Nedostatečný</option>
+                            <option value="5">Špatný</option>
+                        </select>
+                        <br>
+                        <b>Celkové hodnocení: </b>
+                        <select class="selector" name="overall" id="overall" required>
+                            <option disabled selected value> -- zvolte -- </option>
+                            <option value="1">Výborný</option>
+                            <option value="2">Dostatečný</option>
+                            <option value="3">Neutrální</option>
+                            <option value="4">Nedostatečný</option>
+                            <option value="5">Špatný</option>
+                        </select>
+                    </td>
+                    <td class="float-right">
+                        <input class="float-right" type="button" id="send_review" value="Odeslat review"><br>
+                        <span class="float-right" id="review_error" style="color: red"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <b>Komentář (nepovinný):</b><br>
+                        <textarea class="w-100" name="review_comment" id="review_comment" rows="10"
+                                  style="resize: none" placeholder="Komentář k příspěvku"></textarea>
+                    </td>
+                </tr>
+            </table>
+    </form>
+    </p>
+
+</div>
+<hr>
+<div>
+    <h4>Příspěvek</h4>
+    <b>Název: </b>{{ post_title | raw }}
+</div>
+<div>
+    <b>Autor: </b>{{ author | raw }}
+</div>
+<br>
+<div>
+    <p>
+        {{ post_text | raw }}
+        {{ post_file | raw }}
+    </p>
+</div>

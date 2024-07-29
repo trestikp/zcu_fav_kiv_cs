@@ -1,0 +1,26 @@
+1	pouzito "=" misto ":="
+2	za "=" musi nasledovat cislo
+3	za identifikatorem ma nasledovat "="
+4	za "const", "var", "procedure" musi nasledovat identifikator
+5	chybi strednik nebo carka
+6	nespravny symbol po deklaraci procedury
+7	je ocekavan prikaz
+8	neocekavany symbol za prikazovou casti bloku
+9	ocekavam tecku
+10	nespravny symbol v prikazu
+11	nedeklarovany identifikator
+12	prirazeni konstante a procedure neni dovoleno
+13	operator prirazeni je ":="
+14	za "call" musi nasledovat identifikator
+15	volani konstanty nebo promenne neni dovoleno
+16	ocekavano "then"
+17	ocekavano "end" nebo ";"
+18	ocekavano "do"
+19	nespravne pouzity symbol za prikazem
+20	ocekavam relaci
+21	jmeno procedury nelze pouzit ve vyrazu
+22	chybi uzaviraci zavorka
+23	faktor nesmi koncit timto symbolem
+24	vyraz nesmi zacinat timto symbolem
+30	prilis velke cislo
+32	prilis velke zanoreni

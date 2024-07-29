@@ -1,0 +1,45 @@
+version: "3"
+services:
+
+  backend:
+    build: ./bikesharing-backend
+    image: bikesharing-backend
+    container_name: bikesharing-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+      - activemq
+
+  frontend:
+    build: ./bikesharing-ui
+    image: bikesharing-ui
+    container_name: bikesharing-ui
+    ulimits:
+      nofile:
+        soft: 4096
+        hard: 8182
+    ports:
+      - "4200:4200"
+    # it probably doesn't need to depend on activemq, but why not
+    depends_on:
+      - activemq
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bikesharing
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+  
+  activemq:
+    image: rmohr/activemq:latest
+    container_name: activemq
+    ports:
+      - "61614:61614"
+      - "61616:61616"
+      - "8161:8161"

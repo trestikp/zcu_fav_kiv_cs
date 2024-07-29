@@ -1,0 +1,49 @@
+<div class="container-fluid d-flex justify-content-center">
+
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="failedLoad">
+    Failed to load data. Try refreshing the page or contact the administrator.
+  </div>
+
+  <div *ngIf="!failedLoad" class="d-flex justify-content-center">
+    <div *ngIf="hasData" class="table_div">
+      <table mat-table [dataSource]="bikes">
+
+        <ng-container matColumnDef="index">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let bike; let i = index"> {{ i + 1 }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="bikeId">
+          <th mat-header-cell *matHeaderCellDef>Bike ID</th>
+          <td mat-cell *matCellDef="let bike"> {{ bike.id }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="standName">
+          <th mat-header-cell *matHeaderCellDef>At stand</th>
+          <td mat-cell *matCellDef="let bike"> {{ bike.stand.name }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastServiceDate">
+          <th mat-header-cell *matHeaderCellDef>Last serviced</th>
+          <td mat-cell *matCellDef="let bike"> {{ bike.lastServiceDate }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let bike">
+            <button class="btn btn-primary" (click)="markBikeServiced(bike)">Mark serviced</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-success mt-2" role="alert" *ngIf="!hasData">
+      All bikes are currently serviced. Good job!
+    </div>
+
+  </div>
+
+</div>

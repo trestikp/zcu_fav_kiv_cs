@@ -1,0 +1,152 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Medovka</string>
+    <string name="menu_about">O aplikaci</string>
+    <string name="menu_products">Produkty</string>
+    <string name="menu_orders">Objednávky</string>
+    <string name="menu_warehouse">Sklad</string>
+    <string name="pm_show">Přehled produktů</string>
+    <string name="pm_add">Přidat produkt</string>
+    <string name="pm_copy">Zkopírovat produkt</string>
+    <string name="pm_del">Odstranit produkt</string>
+    <string name="abt_img_desc">ZCU-FAV logo</string>
+    <string name="abt_text">
+        Tato aplikace byla vytvořena jako semestrální práce
+        pro předměty KIV/MBKZ a KIV/UUR na Fakultě Aplikovaných
+        Věd (FAV) na Západočeské Univerzitě v Plzni (ZČU).
+    </string>
+    <string name="abt_author">Vývojář: Pavel Třeštík</string>
+    <string name="om_l_active">Aktivní objednávky</string>
+    <string name="om_l_completed">Dokončené objednávky</string>
+    <string name="om_create">Vytvořit objednávku</string>
+    <string name="pd_add">Doplnit produkt</string>
+    <string name="product">Produkt</string>
+    <string name="cancel_order">Zrušit objednávku</string>
+    <string name="finish_order">Splnit objednávku</string>
+    <string name="cancel">Zrušit</string>
+    <string name="cancel_addition">Zrušit přidání</string>
+    <string name="add">Přidat</string>
+    <string name="add_product">Přidat produkt</string>
+    <string name="not_chosen">Nevybráno</string>
+    <string name="copy">kopie</string>
+    <!--    <string name="Copy">Kopie</string>-->
+    <string name="restock">Naskladnit</string>
+    <string name="modify">Upravit</string>
+    <string name="product_name">Jméno produktu</string>
+    <string name="value">hodnota</string>
+    <string name="remove_selected_products">Odstraň vybrané produkty</string>
+    <string name="product_has_no_attributes">Produkt nemá atributy</string>
+    <string name="in_stock">Na skladě</string>
+    <string name="reserved">Rezervováno</string>
+    <string name="sold">Prodáno</string>
+    <string name="product_restock">Doplnění produktu</string>
+    <string name="restock_failed_invalid_value">Nepodařilo se naskadnit produkt.
+        Chybná hodnota. Hodnota musí být kladné číslof</string>
+    <string name="product_removal_prompt">Opravdu si přejete smazat vybrané produkty? Tato akce
+        nelze vrátit!</string>
+    <string name="restock_hint">počet k doplnění</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cancel_edit">Zrušit úpravu</string>
+    <string name="confirm_edit">Editovat</string>
+    <string name="empty_order_list">List objednávek je prázdný.</string>
+    <string name="products">Produkty</string>
+    <string name="product_browsing">Prohlížení produktů</string>
+    <string name="product_copy">Kopírování produktu</string>
+    <string name="product_deletion">Odebrání produktů</string>
+    <string name="default_list">Nespecifikovaný list</string>
+    <string name="product_edit">Editování produktu</string>
+    <string name="product_addition">Přidání produktu</string>
+    <string name="product_detail">Detaily produktu</string>
+    <string name="orders_active">Aktivní objednávky</string>
+    <string name="orders_finished">Dokončené objednávky</string>
+    <string name="orders">Objednávky</string>
+    <string name="name">Jméno</string>
+    <string name="id">ID</string>
+    <string name="city_post">Město, psč.</string>
+    <string name="street_hn">Ulice, č.p.</string>
+    <string name="status">Status</string>
+    <string name="created">Založena</string>
+    <string name="finished">Dokončena</string>
+    <string name="list_products">Seznam produktů:</string>
+    <string name="uninitialized">---</string>
+    <string name="order_detail">Detaily objednávky</string>
+    <string name="active">Aktivní</string>
+    <string name="create_order">Vytvořit objednávku</string>
+    <string name="post_code">PSČ</string>
+    <string name="city">Město</string>
+    <string name="street">Ulice</string>
+    <string name="house_number">Číslo popisné</string>
+    <string name="order_addition">Přidání objednávky</string>
+    <string name="incorrect_value">Chybná hodnota</string>
+    <string name="incorrect_post">PSČ musí být peticiferné číslo. Např.: 12345</string>
+    <string name="understand">Rozumím</string>
+    <string name="incorrect_hn">Číslo popisné musí být celé číslo.</string>
+    <string name="order_creation_info">Všechny údaje jsou povinné a
+        je třeba vybrat alespoň 1 produkt!</string>
+    <string name="count_short">ks</string>
+    <string name="count">počet</string>
+    <string name="image_missing">Nemá obrázek</string>
+    <string name="price">Cena</string>
+    <string name="p_name_mustnt_be_empty">Jméno nesmí být prázdné!</string>
+    <string name="delete">Smazat</string>
+    <string name="products_successfully_deleted">Produkt/y úspěšně smazány</string>
+    <string name="failed_to_load_list">Nepodařilo se načíst seznam</string>
+    <string name="order_creation_impossible">Objednávku nelze vytvořit,
+        protože nejsou dostupné produkty. Buď žádné produkty nejsou
+        na skladě nebo neexistují.</string>
+    <string name="back">Zpět</string>
+    <string name="previous_row_must_have_selected_product">Předchozí řádka musím mít
+        vybraný produkt</string>
+    <string name="missing_products">Chybí produkty</string>
+    <string name="table_must_contain_at_least_one_row">Seznam produktů musí obsahovat
+        alespoň jeden produkt</string>
+    <string name="make_sure_products_are_correct">Ujistěte se prosím, že máte vybrané
+        produkt/y a zadané možství</string>
+    <string name="empty_value">Prázdná hodnota</string>
+    <string name="field_must_contain_value">Pole musí mít hodnotu</string>
+    <string name="do_copy">Kopírovat</string>
+    <string name="copy_prompt">Opravdu chcete kopírovat produkt </string>
+    <string name="product_copy_success">Produkt úspěšně zkopírován</string>
+    <string name="star_are_compulsory">Položky s * jsou povinné</string>
+    <string name="empty_values_are_not_added">Prázdné pole nebudou přidána</string>
+    <string name="empty_values_are_not_added_and_are_removed">Prázdné pole nebudou přidána a
+        pokud již existují, budou odebrána</string>
+    <string name="number_value">číselná hodnota</string>
+    <string name="word_value">slovní hodnota</string>
+    <string name="product_created_successfully">Produkt úspěšně vytvořen</string>
+    <string name="attributes_fetch_err_or_empty">Nepodařilo se získat atributy
+        nebo žádné nejsou</string>
+    <string name="product_creation_still_possible">Produkt stále lze vytvořit, ale nebude
+        mít žádné vlastnosti (atributy)</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="order_cancelation">Zrušení objednávky</string>
+    <string name="order_cancelation_prompt">Opravdu si přejete zrušit objednávku?</string>
+    <string name="order_completion">Dokončení objednávky</string>
+    <string name="order_completion_prompt">Opravdu si přejete dokončit objednávku?</string>
+    <string name="order_cancelation_success">Zrušení objednávky úspěšné</string>
+    <string name="order_completion_success">Dokončení objednávky úspěšné</string>
+    <string name="order_creation_success">Objednávka úspěšně vytvořena</string>
+    <string name="created2">Vytvořena</string>
+    <string name="delete_row">Odstranit řádku</string>
+    <string name="missing_stock">Nedostatek na skladě</string>
+    <string name="only">Pouze</string>
+    <string name="in_stock_lower_case">na skladě</string>
+    <string name="save_changes">Uložit změny</string>
+    <string name="product_list_with_zero">Jeden nebo více produktů má množství 0. Tyto produkty
+        nebudou přidány do objednávky</string>
+    <string name="product_zero_ordered">Produkt s 0 množstvím</string>
+    <string name="continuee">Pokračovat</string>
+    <string name="price_must_be_positive">Cena musí být celé kladné číslo</string>
+    <string name="add_image_to_product">Přidat obrázek produktu</string>
+    <string name="delete_image_from_product">Odebrat obrázek produktu</string>
+    <string name="failed_to_load_image">Nepodařilo se načíst obrázek</string>
+    <string name="max_image_size_exceeded">Obrázek je příliš velký.
+        Maximální velikost je 4 MB</string>
+    <string name="post_mustnt_begin_with_0">PSČ nesmí začínat nulou (0)</string>
+    <string name="housen_mustnt_begin_with_0">Číslo popisné nemsí začínat nulou (0)</string>
+    <string name="filter_for_newer">Přidat filter pro novější než</string>
+    <string name="filter_for_older">Přidat filter pro starší než</string>
+    <string name="filter_both_cancel">Zrušit oba filtry</string>
+    <string name="product_list_is_empty">Seznam produktů je prázný. Produtky se buď nepovedlo
+        získat z databáze nebo žádné neexistují.</string>
+</resources>

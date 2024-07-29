@@ -1,0 +1,38 @@
+- kontrolni test (v pulce semestru na prednasce) - min. 5 bodu, ABCD
+- zkouska se kontroluje s nim a tim padem vznika ustni
+	- pocita jen 3 terminy (2 radne, 3ti nemusi byt)
+
+- Manning - kniha. Prednasky zhruba nasleduji knihu, dokonce i slidy jsou asi od autora.
+
+01_lecture:
+	- queues for URLs
+	- boolean retrieval
+	- unstructured data in 1650 
+		- grep (shakespear - what plays contain BRUTUS and CAESAR but not CALPURNIA)
+			- why is grep bad: slow, line-oriented, IR is document oriented, NOT CALPURNIA is non-trivial, other operations (ROMANS near COUNTRYMAN) not feasible
+		- 0/1 vector for BRUTUS (boolean table = vocabulary (tokens (words) in our collection of document))
+			- can't build incidence matrix
+			- 500 * 10^9 - 1/0 = too sparse (and large)
+				- better solution, remember only 1s = INVERTED INDEX (aka inverted file) (important in this subject MUST KNOW)
+				- for each word (term) we save index where it appears (posting) (dictionary -> postings == e.g.: == brutus -> 1|2|4|11..., caesar -> 1|2|15|35..)
+					- alphabetically sorted, +frequency, removed duplicates
+	Related to II
+	- porter stemmer: a few rules
+		- rule	example == SSES -> SS	caresses -> caress, IES -> I ponies -> poni....
+	- positional indexes
+		  slovo, freq: <doc: <indexes>>
+		- TO, 993427: <1: <7, 13...>, 2: <1, 17, 74.., 255>, 4: <..>, 5: <...>, 7: <...>>
+	- dict as array of fixed-width entries
+		- 		term	doc. freq	pointer to posting list
+		- space needed: 20B 	4B		4B
+	- wildcard queries: *+...
+		- easy with B-tree
+	- correcting queries: ex.: informaton -> information
+	- edit distance: levenshtein distance (number of transformations that converts one string to another. Transformations: insert, delete, replace)
+		- eg: dog-do: 1, cat-cart: 1, cat-cut:1, cat-act: 2
+		- demerau-levenshtein distance (includes transposition -> cat-act: 1)
+	- blocked sort-based indexing - algorithm, uses disk to save memory
+	- map-reduce: architecture/ process
+	- dictionary reduction - dict is saved as linear array and only saves starts of terms
+	- posting compression
+	- problem with boolean search: feast or famine (too many or too few)

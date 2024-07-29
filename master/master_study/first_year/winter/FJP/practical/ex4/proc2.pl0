@@ -1,0 +1,23 @@
+var a;
+
+procedure pr1;
+var b;
+	
+  procedure pr2;
+  var c;
+  begin
+    c:=11;
+    b:=22;
+    a:=33;
+  end;
+
+begin
+  a:=10;
+  b:=20;
+  call pr2;
+end;
+
+begin
+  a:=100;
+  call pr1;
+end.

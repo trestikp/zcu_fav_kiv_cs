@@ -1,0 +1,25 @@
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /usr/bin/arm-none-eabi-g++ 
+Build flags: ;-O0;-g;-nostartfiles;-mfloat-abi=hard;-mfpu=vfp;-march=armv6zk;-mtune=arm1176jzf-s;-O0;-g;-nostartfiles;-mfloat-abi=hard;-mfpu=vfp;-march=armv6zk;-mtune=arm1176jzf-s
+Id flags:  
+
+The output was:
+1
+/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/ld: cannot find -lm: No such file or directory
+/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/ld: cannot find -lg: No such file or directory
+/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/ld: cannot find -lc: No such file or directory
+collect2: error: ld returned 1 exit status
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /usr/lib64/ccache/arm-none-eabi-gcc 
+Build flags: ;-O0;-g;-nostartfiles;-mfloat-abi=hard;-mfpu=vfp;-march=armv6zk;-mtune=arm1176jzf-s;-O0;-g;-nostartfiles;-mfloat-abi=hard;-mfpu=vfp;-march=armv6zk;-mtune=arm1176jzf-s
+Id flags:  
+
+The output was:
+1
+/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/ld: cannot find -lg: No such file or directory
+/usr/lib/gcc/arm-none-eabi/12.2.0/../../../../arm-none-eabi/bin/ld: cannot find -lc: No such file or directory
+collect2: error: ld returned 1 exit status
+
+

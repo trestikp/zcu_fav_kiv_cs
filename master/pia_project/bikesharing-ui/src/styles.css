@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: blue;
+  --accent-color: red;
+}
+
+html, body {
+  height: 100%;
+  min-height: 100px;
+  min-width: 100px;
+}
+
+app-osm-view {
+  height: 100%;
+  width: 100%;
+}

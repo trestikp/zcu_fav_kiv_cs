@@ -1,0 +1,6 @@
+.idea/
+target/
+TREC/
+trec_eval.8.1/
+log/
+storage/crawled.json.large

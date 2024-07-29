@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark flex-grow-0 pe-4 ps-4">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Bikesharing</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarList"
+            aria-controls="navbarList" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarList">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item" *ngIf="getRoles().includes('REGULAR') || getRoles().includes('SERVICEMAN')">
+          <a class="nav-link" href="/ride_history">Past rides</a>
+        </li>
+        <li class="nav-item" *ngIf="getRoles().includes('SERVICEMAN')">
+          <a class="nav-link" href="/bike_service">Due for service</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About</a>
+        </li>
+        <li class="nav-item" *ngIf="getRoles().includes('SERVICEMAN') && isAdminEnabled()">
+          <a class="nav-link" href="/hidden_admin">Admin</a>
+        </li>
+      </ul>
+    </div>
+
+<!--    <div *ngIf="!hasToken()" class="">-->
+<!--      &lt;!&ndash;      <button type="button" class="btn btn-outline-primary col-md-2 ms-auto me-1" href="/login">Login</button>&ndash;&gt;-->
+<!--      <a class="btn btn-outline-primary col-md-2 ms-auto me-1" href="/login" role="button">Login</a>-->
+<!--      &lt;!&ndash;      <button type="button" class="btn btn-primary col-md-2 me-1">Register</button>&ndash;&gt;-->
+<!--      <a class="btn btn-primary col-md-2 me-1" href="/register" role="button">Register</a>-->
+<!--    </div>-->
+<!--    <div *ngIf="hasToken()" class="">-->
+<!--      <span>User {{ getUsername() }} logged in </span>-->
+<!--      &lt;!&ndash;        <a class="btn btn-outline-primary col-md-2 ms-auto me-1" href="/logout" role="button">Logout</a>&ndash;&gt;-->
+<!--      <button type="button" class="btn btn-outline-primary col-md-2 ms-auto me-1" (click)="logout()">Logout</button>-->
+<!--    </div>-->
+
+<!--    workaround because divs have some dodgy thing about flex width around the elements -->
+    <a *ngIf="!hasToken()" class="btn btn-outline-primary col-md-2 ms-auto me-1" href="/login" role="button">Login</a>
+    <a *ngIf="!hasToken()" class="btn btn-primary col-md-2 me-1" href="/register" role="button">Register</a>
+    <span *ngIf="hasToken()" class="me-1 text-light">User {{ getUsername() }} logged in </span>
+    <button *ngIf="hasToken()" type="button" class="btn btn-outline-primary col-md-2 ms-auto me-1" (click)="logout()">Logout</button>
+  </div>
+</nav>

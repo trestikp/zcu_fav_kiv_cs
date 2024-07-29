@@ -1,0 +1,21 @@
+[
+    "staticTest.js",
+    "dynamicTest.js",
+    "boolean.js",
+    "conditionConcat.js",
+    "floatArithmetics.js",
+    "floatConditions.js",
+    "ifElse.js",
+    "intArithmetics.js",
+    "intConditions.js",
+    "loop.js",
+    "parallelAssignment.js",
+    "proceduresParse.js",
+    "return.js",
+    "ternary.js",
+    "negative/invalidKeyName.js",
+    "negative/notDeclaredVariable.js",
+    "negative/missingEndDot.js",
+    "negative/unknownOperator.js",
+    "negative/missingSemicolon.js"
+]

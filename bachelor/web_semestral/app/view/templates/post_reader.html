@@ -1,0 +1,18 @@
+<div>
+    <input id="back_to_published" type="button" value="Zpět na příspěvky">
+    <!--potentially "report post" button-->
+</div>
+<br>
+<div>
+    <b>Název: </b>{{ post_title | raw }}
+</div>
+<div>
+    <b>Autor: </b>{{ author | raw }}
+</div>
+<br>
+<div>
+    <p>
+        {{ post_text | raw }}
+        {{ post_file | raw }}
+    </p>
+</div>
